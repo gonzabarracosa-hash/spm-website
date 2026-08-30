@@ -46,17 +46,17 @@ export default function Footer() {
           </div>
           <div className="ftr-col">
             <h5>{t('footer.services')}</h5>
-            <a href="#services">{t('footer.s1')}</a>
-            <a href="#services">{t('footer.s2')}</a>
-            <a href="#services">{t('footer.s3')}</a>
-            <a href="#work">{t('footer.s4')}</a>
+            <a href="/#services">{t('footer.s1')}</a>
+            <a href="/#services">{t('footer.s2')}</a>
+            <a href="/#services">{t('footer.s3')}</a>
+            <a href="/#work">{t('footer.s4')}</a>
           </div>
           <div className="ftr-col">
             <h5>{t('footer.company')}</h5>
-            <a href="#about">{t('footer.c1')}</a>
-            <a href="#process">{t('footer.c2')}</a>
-            <a href="#faq">{t('footer.c3')}</a>
-            <a href="#contact">{t('footer.c4')}</a>
+            <a href="/#about">{t('footer.c1')}</a>
+            <a href="/#process">{t('footer.c2')}</a>
+            <a href="/#faq">{t('footer.c3')}</a>
+            <a href="/#contact">{t('footer.c4')}</a>
           </div>
           <div className="ftr-col">
             <h5>{t('footer.news')}</h5>

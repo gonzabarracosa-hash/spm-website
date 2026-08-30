@@ -372,3 +372,83 @@ form.contact{padding:46px 48px; display:flex; flex-direction:column; gap:16px;}
   .cta-left,form.contact{padding:32px 24px;}
   .ftr-bot{flex-direction:column; gap:10px; align-items:flex-start;}
 }
+
+/* ===========================================================
+   DocVault case-study page additions — reuses the tokens above
+   =========================================================== */
+.cs-hero{background:var(--paper); border-bottom:1px solid var(--line); padding:64px 0 0;}
+.cs-crumb{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--grey-2); display:flex; align-items:center; gap:8px;}
+.cs-crumb a{color:var(--grey); border-bottom:1px solid var(--line);}
+.cs-crumb a:hover{color:var(--navy); border-color:var(--navy);}
+.cs-hero h1{font-size:clamp(34px,4.6vw,54px); font-weight:800; margin-top:16px; max-width:18ch; text-wrap:balance;}
+.cs-hero .hero-sub{max-width:640px;}
+.cs-meta{display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); margin-top:44px;}
+.cs-meta div{padding:20px 0; border-right:1px solid var(--line);}
+.cs-meta div:last-child{border-right:none;}
+.cs-meta .k{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--grey-2);}
+.cs-meta .v{font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; color:var(--navy); margin-top:6px;}
+
+.cs-demo{padding:56px 0 8px;}
+
+.cs-quote{background:var(--navy); padding:80px 0;}
+.cs-quote blockquote{margin:0; font-family:'Montserrat',sans-serif; font-weight:700; font-size:clamp(22px,3.2vw,32px); line-height:1.35; color:#fff; max-width:26ch; text-wrap:balance;}
+.cs-quote .strike{text-decoration:line-through; opacity:.4;}
+.cs-quote .o{color:var(--orange);}
+.cs-quote .cite{margin-top:20px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8a97a8;}
+
+/* feature cards: reuse .svc but content differs */
+.cs-svc p{min-height:0;}
+
+/* mock UI components */
+.mock{border:1px solid var(--line); border-radius:var(--r); background:var(--paper); overflow:hidden; box-shadow:0 24px 60px -30px rgba(10,29,55,.28);}
+.mock .mh{padding:11px 16px; border-bottom:1px solid var(--line); font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--grey-2); display:flex; align-items:center; justify-content:space-between;}
+.mock .mb{padding:22px;}
+.revchip{font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600; padding:4px 9px; border-radius:3px;}
+.revchip.old{background:var(--line-2); color:var(--grey);}
+.revchip.cur{background:rgba(50,195,106,.14); color:var(--green);}
+.filepair{display:flex; align-items:center; gap:9px; margin-top:16px; font-size:12px;}
+.fbadge{font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:700; color:#fff; padding:3px 6px; border-radius:3px;}
+.fbadge.pdf{background:#C22B1F;} .fbadge.dwg{background:#2B6FC2;}
+.fname{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--grey);}
+.mini-tbl{width:100%; border-collapse:collapse; font-size:12px;}
+.mini-tbl th{text-align:left; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:var(--grey-2); font-weight:500; padding:0 10px 8px 0;}
+.mini-tbl td{padding:9px 10px 9px 0; border-top:1px solid var(--line-2);}
+.mini-tbl tr:first-child td{border-top:none;}
+.plink{font-size:10.5px; font-weight:600; border:1px solid var(--line); border-radius:4px; padding:3px 7px; color:var(--orange);}
+.viewer{background:var(--navy); border-radius:var(--r); padding:18px;}
+.viewer .tb{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
+.viewer .z{display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:#cdd8e6;}
+.viewer .zb{width:22px; height:22px; border-radius:3px; border:1px solid rgba(255,255,255,.2); color:#fff; display:flex; align-items:center; justify-content:center; font-size:13px;}
+.viewer .cv{background:#fff; border-radius:3px; aspect-ratio:16/10; display:flex; align-items:center; justify-content:center;}
+.viewer .cv svg{width:58%;}
+.viewer .fl{color:#8a97a8; font-family:'IBM Plex Mono',monospace; font-size:10px; margin-top:10px;}
+.search-mk{border:1px solid var(--line); border-radius:8px; padding:12px 14px; display:flex; align-items:center; gap:10px; background:var(--cloud);}
+.search-mk .q{font-size:13px; color:var(--navy);}
+.interp{margin-top:12px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--grey-2);}
+.interp b{color:var(--orange);}
+.sresult{margin-top:14px; display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border:1px solid var(--line); border-radius:6px;}
+.sresult .rn{font-size:12.5px; font-weight:600; color:var(--navy);}
+.sresult .rs{font-size:11px; color:var(--grey-2);}
+.tree{font-size:13px;}
+.tree .p{font-weight:700; color:var(--orange); padding:6px 0;}
+.tree .e{display:flex; align-items:center; justify-content:space-between; padding:7px 0 7px 18px; border-left:1px solid var(--line); margin-left:3px; color:var(--ink-2);}
+.tree .e.active{color:var(--orange); font-weight:600;}
+.tree .cnt{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--grey-2);}
+
+.cs-stat{background:var(--navy); text-align:center; padding:96px 0;}
+.cs-stat .num{font-family:'Montserrat',sans-serif; font-weight:800; color:var(--orange); font-size:clamp(80px,14vw,150px); line-height:.85;}
+.cs-stat .lbl{font-family:'Inter',sans-serif; font-weight:600; letter-spacing:.16em; text-transform:uppercase; font-size:14px; color:#fff; margin-top:2px;}
+.cs-stat .sub{max-width:46ch; margin:20px auto 0; color:#aeb9c7; font-size:15.5px; line-height:1.6;}
+.cs-facts{display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:38px;}
+.cs-facts span{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#cdd8e6; border:1px solid rgba(255,255,255,.16); padding:8px 14px; border-radius:3px;}
+
+.cs-cta{background:var(--cloud); padding:96px 0; text-align:center;}
+.cs-cta h2{font-size:clamp(28px,3.6vw,42px); font-weight:800; max-width:20ch; margin:14px auto 0; text-wrap:balance;}
+.cs-cta p{max-width:52ch; margin:20px auto 0; color:var(--ink-2); font-size:16px; line-height:1.6;}
+.cs-cta .actions{display:flex; justify-content:center; gap:14px; margin-top:32px; flex-wrap:wrap;}
+
+@media (max-width:760px){
+  .cs-meta{grid-template-columns:1fr 1fr;}
+  .cs-meta div:nth-child(2){border-right:none;}
+}
+

@@ -54,20 +54,20 @@ export default function Header() {
   return (
     <header className={'hdr' + (scrolled ? ' scrolled' : '')} id="hdr">
       <div className="wrap hdr-in">
-        <a className="hdr-logo" href="#top" aria-label="SPM Design Solutions">
+        <a className="hdr-logo" href="/#top" aria-label="SPM Design Solutions">
           <img src="/assets/brand/spm-wordmark-color.png" alt="SPM Design Solutions" />
         </a>
         <nav className="nav">
-          <a href="#services">{t('nav.services')}</a>
-          <a href="#work">{t('nav.work')}</a>
-          <a href="#about">{t('nav.about')}</a>
-          <a href="#faq">{t('nav.faq')}</a>
+          <a href="/#services">{t('nav.services')}</a>
+          <a href="/#work">{t('nav.work')}</a>
+          <a href="/#about">{t('nav.about')}</a>
+          <a href="/#faq">{t('nav.faq')}</a>
         </nav>
         <div className="hdr-cta">
           <div className="lang-switch" id="langSwitch" role="group" aria-label="Language">
             <LangButtons />
           </div>
-          <a href="#contact" className="btn btn-primary">
+          <a href="/#contact" className="btn btn-primary">
             <span>{t('cta.book')}</span> <span className="arw">→</span>
           </a>
           <button
@@ -84,11 +84,11 @@ export default function Header() {
         </div>
       </div>
       <div className={'mobile-nav' + (menuOpen ? ' open' : '')} id="mobileNav">
-        <a href="#services" onClick={closeMenu}>{t('nav.services')}</a>
-        <a href="#work" onClick={closeMenu}>{t('nav.work')}</a>
-        <a href="#about" onClick={closeMenu}>{t('nav.about')}</a>
-        <a href="#faq" onClick={closeMenu}>{t('nav.faq')}</a>
-        <a href="#contact" className="btn btn-primary" onClick={closeMenu}>
+        <a href="/#services" onClick={closeMenu}>{t('nav.services')}</a>
+        <a href="/#work" onClick={closeMenu}>{t('nav.work')}</a>
+        <a href="/#about" onClick={closeMenu}>{t('nav.about')}</a>
+        <a href="/#faq" onClick={closeMenu}>{t('nav.faq')}</a>
+        <a href="/#contact" className="btn btn-primary" onClick={closeMenu}>
           <span>{t('cta.book')}</span> →
         </a>
         <div className="mobile-lang" role="group" aria-label="Language">

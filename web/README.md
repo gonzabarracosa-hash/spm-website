@@ -43,10 +43,18 @@ exports that load React/Babel from unpkg.com at runtime to render their
 animations — that requires outbound internet access to unpkg.com wherever
 this site is deployed.
 
+## Pages
+
+- `/` — the home page (`SPM Home.html`)
+- `/work/docvault-case-study` — the DocVault case study, reusing the shared
+  Header/Footer (updated to drop the old "Courses" nav item and Training
+  copy, matching the final state of the home page rather than the stale
+  standalone file it was ported from). Header/Footer links use `/#section`
+  so in-page navigation still works when you're on this subpage.
+
 ## Not included
 
-The DocVault case-study page (`project/SPM Work (DocVault case study).html`)
-and the language-variant/shareable/standalone home files were out of scope
-for this port (see chat history) — only `SPM Home.html` was implemented.
-The "Read the full case study" link in the Work section points to
-`/work/docvault-case-study`, which doesn't exist yet.
+The language-variant/shareable/standalone home files (`SPM Home (logo +
+video banner).html`, `SPM Home (shareable).html`, `SPM Home
+(standalone).html`) were out of scope for this port (see chat history) —
+only `SPM Home.html` was implemented as the canonical home page.
