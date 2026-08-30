@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SPM Design Solutions Time-Saving Automation &amp; Software for Engineering Teams</title>
+<meta name="description" content="SPM Design Solutions builds CAD automation, AI workflows and custom productivity apps document management, Gantt planning and more that cut 40–70% of repetitive work for engineering teams." />
+<link rel="icon" type="image/png" href="assets/brand/spm-icon-256.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="site.css" />
+</head>
+<body>
+
+<template id="__bundler_thumbnail">
+ <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+ <rect width="512" height="512" fill="#0A1D37"/>
+ <text x="50%" y="48%" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="150" fill="#F5F7FA">SPM</text>
+ <polygon points="330,205 372,205 372,247" fill="#FF6A00"/>
+ <text x="50%" y="62%" text-anchor="middle" font-family="monospace" font-size="26" letter-spacing="10" fill="#9aa3ad">DESIGN SOLUTIONS</text>
+ </svg>
+</template>
+
+<!-- ===== Header ===== -->
+<header class="hdr" id="hdr">
+ <div class="wrap hdr-in">
+ <a class="hdr-logo" href="#top" aria-label="SPM Design Solutions"><img src="assets/brand/spm-wordmark-color.png" alt="SPM Design Solutions" /></a>
+ <nav class="nav">
+ <a href="#services" data-i18n="nav.services">Services</a>
+ <a href="#work" data-i18n="nav.work">Work</a>
+ <a href="#about" data-i18n="nav.about">About</a>
+ <a href="#faq" data-i18n="nav.faq">FAQ</a>
+ </nav>
+ <div class="hdr-cta">
+ <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
+ <button type="button" data-lang="en" class="on">EN</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="es">ES</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="nl">NL</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="de">DE</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="fr">FR</button>
+ </div>
+ <a href="#contact" class="btn btn-primary"><span data-i18n="cta.book">Book a call</span> <span class="arw">→</span></a>
+ <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+ <span></span><span></span><span></span>
+ </button>
+ </div>
+ </div>
+ <div class="mobile-nav" id="mobileNav">
+ <a href="#services" data-i18n="nav.services">Services</a>
+ <a href="#work" data-i18n="nav.work">Work</a>
+ <a href="#about" data-i18n="nav.about">About</a>
+ <a href="#faq" data-i18n="nav.faq">FAQ</a>
+ <a href="#contact" class="btn btn-primary"><span data-i18n="cta.book">Book a call</span> →</a>
+ <div class="mobile-lang" role="group" aria-label="Language">
+ <span class="ml-lbl">Lang</span>
+ <button type="button" data-lang="en" class="on">EN</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="es">ES</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="nl">NL</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="de">DE</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="fr">FR</button>
+ </div>
+ </div>
+</header>
+
+<main id="top">
+
+ <!-- ===== Hero ===== -->
+ <section class="hero">
+ <canvas class="lattice-bg" id="latticeBg" aria-hidden="true"></canvas>
+ <div class="wrap">
+ <div class="hero-grid">
+ <div>
+ <span class="eyebrow" data-i18n="hero.eyebrow">Automation · AI · Custom software</span>
+ <h1 data-i18n-html="hero.h1">Engineer the <mark>busywork</mark> out of your company.</h1>
+ <p class="hero-sub" data-i18n="hero.sub">SPM builds CAD automation, AI workflows and custom internal tools from iLogic scripts to document management and Gantt planning that cut 40–70% of repetitive work for engineering teams.</p>
+ <div class="hero-actions">
+ <a href="#contact" class="btn btn-primary"><span data-i18n="hero.cta1">Book a discovery call</span> <span class="arw">→</span></a>
+ <a href="#work" class="btn btn-ghost" data-i18n="hero.cta2">See the work</a>
+ </div>
+ </div>
+ <figure class="hero-fig">
+ <div class="logo-stage">
+ <video class="logo-video" src="assets/brand/logo-anim.mp4" autoplay muted playsinline preload="auto" disablepictureinpicture controlslist="nodownload noplaybackrate nofullscreen" aria-label="SPM logo animation"></video>
+ <img class="logo-still" src="assets/brand/spm-mark-technical.png" alt="SPM technical illustration" />
+ </div>
+ </figure>
+ </div>
+ <div class="hero-stats">
+ <div class="hstat"><b>40–70%</b><span data-i18n="hero.stat1">time saved</span></div>
+ <div class="hstat"><b>ASME · PED</b><span data-i18n="hero.stat2">standards-aware</span></div>
+ <div class="hstat"><b>BE · DE · NL</b><span data-i18n="hero.stat3">EU based</span></div>
+ <div class="hstat"><b>15+ yrs</b><span data-i18n="hero.stat4">plant design</span></div>
+ </div>
+ </div>
+ </section>
+
+ <!-- ===== Trust ===== -->
+ <section class="trust">
+ <div class="wrap trust-in">
+ <span class="lbl" data-i18n="trust.builton">Built on</span>
+ <div class="trust-logos">
+ <b>Autodesk Inventor</b><b>AutoCAD</b><b>SolidWorks</b><b>Solid Edge</b><b>Python</b>
+ </div>
+ </div>
+ </section>
+
+ <!-- ===== Problem ===== -->
+ <section class="section" id="problem">
+ <div class="wrap">
+ <div class="sec-head reveal">
+ <span class="eyebrow grey" data-i18n="problem.eyebrow">The problem</span>
+ <h2 data-i18n="problem.h2">Your best people are doing work that should be automated.</h2>
+ <p data-i18n="problem.p">Across engineering offices, plants and design shops, the same hours leak away in CAD, in paperwork, in tracking who's doing what.</p>
+ </div>
+ <div class="pains">
+ <div class="pain reveal"><div class="x">01</div><p data-i18n-html="pain1"><b>Manual repetition.</b> Numbering drawings, inserting flanges and nozzles, building BOMs by hand.</p></div>
+ <div class="pain reveal"><div class="x">02</div><p data-i18n-html="pain2"><b>No standardization.</b> Every project and client reinvents the same templates and conventions.</p></div>
+ <div class="pain reveal"><div class="x">03</div><p data-i18n-html="pain3"><b>Revision chaos.</b> IFC → AFC → As-Built handled without any automation or control.</p></div>
+ <div class="pain reveal"><div class="x">04</div><p data-i18n-html="pain4"><b>Scattered tools.</b> Progress tracked in spreadsheets, status chased over email, no single source of truth.</p></div>
+ </div>
+ </div>
+ </section>
+
+ <!-- ===== Services ===== -->
+ <section class="section" id="services" style="background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+ <div class="wrap">
+ <div class="sec-head reveal">
+ <span class="eyebrow" data-i18n="services.eyebrow">What we build</span>
+ <h2 data-i18n="services.h2">Three ways we save you time.</h2>
+ <p data-i18n="services.p">From CAD scripts to full internal tools productized so you can start small, prove the savings, and scale across the company.</p>
+ </div>
+ <div class="svc-grid">
+ <article class="svc reveal">
+ <span class="no" data-i18n="svc1.no">01 / Automation</span>
+ <h3 data-i18n="svc1.h3">CAD Automation</h3>
+ <p data-i18n="svc1.p">Custom iLogic, macros and scripts that erase manual repetition inside Inventor.</p>
+ <ul>
+ <li data-i18n="svc1.li1">Auto flange &amp; nozzle insertion</li>
+ <li data-i18n="svc1.li2">Excel ↔ CAD data sync</li>
+ <li data-i18n="svc1.li3">Drawing numbering &amp; revisions</li>
+ <li data-i18n="svc1.li4">Parametric vessel / tank templates</li>
+ </ul>
+ </article>
+ <article class="svc reveal">
+ <span class="no" data-i18n="svc2.no">02 / Intelligence</span>
+ <h3 data-i18n="svc2.h3">AI for Design</h3>
+ <p data-i18n="svc2.p">Assistants trained on your standards that check, classify and document the work.</p>
+ <ul>
+ <li data-i18n="svc2.li1">ASME / EN 13480 design checks</li>
+ <li data-i18n="svc2.li2">Isometric &amp; P&amp;ID reading (OCR)</li>
+ <li data-i18n="svc2.li3">Auto technical reports &amp; memos</li>
+ <li data-i18n="svc2.li4">Heavy IFC model review</li>
+ </ul>
+ </article>
+ <article class="svc reveal">
+ <span class="no" data-i18n="svc3.no">03 / Custom software</span>
+ <h3 data-i18n="svc3.h3">Productivity Apps</h3>
+ <p data-i18n="svc3.p">Purpose-built internal tools that replace spreadsheets and email chains.</p>
+ <ul>
+ <li data-i18n="svc3.li1">Revision-aware document management</li>
+ <li data-i18n="svc3.li2">Gantt &amp; project tracking</li>
+ <li data-i18n="svc3.li3">Custom dashboards &amp; workflows</li>
+ <li data-i18n="svc3.li4">Built to fit your existing tools</li>
+ </ul>
+ </article>
+ </div>
+ </div>
+ </section>
+
+ <!-- ===== Process (navy band) ===== -->
+ <section class="section band" id="process">
+ <div class="wrap">
+ <div class="sec-head reveal">
+ <span class="eyebrow" data-i18n="process.eyebrow">How a project runs</span>
+ <h2 data-i18n="process.h2">From a painful workflow to shipped automation.</h2>
+ <p data-i18n="process.p">A fixed-scope path that de-risks the first engagement and proves ROI on your own drawings.</p>
+ </div>
+ <div class="flow">
+ <div class="step reveal"><div class="s">01</div><h4 data-i18n="step1.h4">Discovery call</h4><p data-i18n="step1.p">We meet to identify the projects and needs where we can help.</p></div>
+ <div class="step reveal"><div class="s">02</div><h4 data-i18n="step2.h4">Demo &amp; proposal</h4><p data-i18n="step2.p">We show early progress and come back with a quote.</p></div>
+ <div class="step reveal"><div class="s">03</div><h4 data-i18n="step3.h4">Build</h4><p data-i18n="step3.p">Once started, the project runs through 4 stages to final delivery.</p></div>
+ <div class="step reveal"><div class="s">04</div><h4 data-i18n="step4.h4">Rollout &amp; training</h4><p data-i18n="step4.p">Delivered and handed over with hands-on training for your team.</p></div>
+ <div class="step reveal"><div class="s">05</div><h4 data-i18n="step5.h4">Maintenance</h4><p data-i18n="step5.p">Ongoing support and updates, if you need it.</p></div>
+ </div>
+ <div class="wf-widget reveal" data-wf>
+ <div class="wf-head">
+ <div class="wf-badges">
+ <span class="wf-badge">Active</span>
+ <span class="wf-label">Automation flow</span>
+ </div>
+ <button type="button" class="wf-addbtn" data-wf-add>+ Add step</button>
+ </div>
+ <div class="wf-canvas" data-wf-canvas>
+ <div class="wf-inner" data-wf-inner>
+ <svg class="wf-svg" data-wf-svg></svg>
+ </div>
+ </div>
+ <div class="wf-foot">
+ <div class="wf-stats">
+ <span class="wf-stat-item"><span class="wf-dot" style="background:var(--green)"></span><span data-wf-nodecount>3 steps</span></span>
+ <span class="wf-stat-item"><span class="wf-dot" style="background:var(--orange)"></span><span data-wf-conncount>2 connections</span></span>
+ </div>
+ <span class="wf-hint">Drag steps to reposition</span>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- ===== Proof / demo ===== -->
+ <section class="section" id="work">
+ <div class="wrap">
+ <div class="sec-head reveal">
+ <span class="eyebrow" data-i18n="work.eyebrow">Proof, not promises</span>
+ <h2 data-i18n="work.h2">One assembly, duplicated: 38 seconds vs. a morning.</h2>
+ <p data-i18n="work.p">A representative iLogic run, copying and renumbering a full assembly across product variants.</p>
+ </div>
+ <div class="work-demos">
+ <div class="demo reveal">
+ <iframe src="explainer/Video Explicativo iLogic.dc.html" title="SPM iLogic automation explainer" loading="lazy"></iframe>
+ </div>
+ <div class="demo reveal">
+ <iframe src="explainer/Video Explicativo ACOTARC.dc.html" title="SPM ACOTARC automation explainer" loading="lazy"></iframe>
+ </div>
+ <div class="demo reveal">
+ <iframe src="explainer/Video Explicativo Agrupador de Paneles.dc.html" title="SPM panel-grouping automation explainer" loading="lazy"></iframe>
+ </div>
+ <div class="demo reveal">
+ <iframe src="explainer/Video Explicativo Generador de Planos IDW.dc.html" title="SPM IDW drawing generator explainer" loading="lazy"></iframe>
+ </div>
+ <div class="demo reveal">
+ <iframe src="explainer/Video Explicativo Revision de Planos.dc.html" title="SPM drawing review explainer" loading="lazy"></iframe>
+ </div>
+ </div>
+ <div class="proof-list reveal" style="margin-top:36px;">
+ <div class="proof-item"><b>40–70%</b><span data-i18n="proof1">fewer hours on repetitive design tasks across a project</span></div>
+ <div class="proof-item green"><b>38s</b><span data-i18n="proof2">to duplicate &amp; renumber 142 assembly parts vs. ~6h 20m by hand</span></div>
+ <div class="proof-item"><b>€2.5B</b><span data-i18n="proof3">EU market for CAD-automation services, growing 8–12% / yr</span></div>
+ </div>
+
+ <!-- ===== Case 2: DocVault (confidential client engagement) ===== -->
+ <div class="sec-head reveal" style="margin-top:88px;">
+ <span class="eyebrow grey">Client case · confidential</span>
+ <h2>A drawing office that could never tell which revision was current.</h2>
+ <p>An industrial engineering client came to us with hundreds of drawings spread across shared folders and email threads the classic "Rev2_final_v3" problem. We built DocVault: a revision-aware document system, delivered in a single working session.</p>
+ </div>
+ <div class="proof-grid">
+ <div class="demo reveal">
+ <video src="assets/SPM_DocVault_1x1.mp4" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"></video>
+ </div>
+ <div class="proof-list reveal">
+ <div class="proof-item"><b>1</b><span>working session from spec to running system, no backlog in between</span></div>
+ <div class="proof-item green"><b>0</b><span>drawings lost every prior revision kept, current one always flagged</span></div>
+ <div class="proof-item"><b>PDF+DWG</b><span>companion files auto-grouped under the same revision, no manual tagging</span></div>
+ </div>
+ </div>
+ <div class="reveal" style="margin-top:28px;">
+ <a href="SPM Work (DocVault case study).html" class="btn btn-ghost">Read the full case study →</a>
+ </div>
+ </div>
+ </section>
+
+ <!-- ===== About / founder ===== -->
+ <section class="section about" id="about">
+ <div class="wrap">
+ <div class="about-grid">
+ <div class="founder-photo reveal"><img src="assets/founder-photo.png" alt="SPM founder" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" /></div>
+ <div class="reveal">
+ <span class="eyebrow" data-i18n="about.eyebrow">Who's behind SPM</span>
+ <h2 data-i18n="about.h2">Engineering depth, not generic IT.</h2>
+ <p data-i18n="about.p1">SPM is led by a senior mechanical design engineer who has spent 15+ years in EPC and industrial-equipment environments pressure vessels, tanks and piping and writes the automation himself. That dual expertise is rare, and it's the whole point.</p>
+ <p data-i18n="about.p2">Based in Belgium, working across Germany, the Netherlands and Switzerland, with deep knowledge of the standards your auditors actually care about.</p>
+ <div class="creds">
+ <span class="cred">ASME VIII</span>
+ <span class="cred">EN 13480</span>
+ <span class="cred">PED</span>
+ <span class="cred">AD 2000</span>
+ <span class="cred" data-i18n="about.cred_epc">EPC experience</span>
+ <span class="cred">iLogic · Python</span>
+ <span class="cred">IFC / AFC / As-Built</span>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- ===== FAQ ===== -->
+ <section class="section" id="faq" style="background:var(--paper); border-top:1px solid var(--line);">
+ <div class="wrap">
+ <div class="sec-head reveal" style="margin:0 auto; text-align:center;">
+ <span class="eyebrow" data-i18n="faq.eyebrow">Questions</span>
+ <h2 data-i18n="faq.h2">The things engineers ask first.</h2>
+ </div>
+ <div class="faq">
+ <div class="qa reveal">
+ <button class="qa-q"><span data-i18n="faq.q1">Do you need access to our models and data?</span> <span class="ic"></span></button>
+ <div class="qa-a"><p data-i18n="faq.a1">For a pilot, a single representative part and its spec sheet is usually enough. AI tools can be deployed inside your own infrastructure so data never leaves your environment.</p></div>
+ </div>
+ <div class="qa reveal">
+ <button class="qa-q"><span data-i18n="faq.q2">What if we use SolidWorks or Solid Edge, not Inventor?</span> <span class="ic"></span></button>
+ <div class="qa-a"><p data-i18n="faq.a2">Inventor + iLogic is the deepest specialty, but the automation skills are platform-aware. Python, IFC and AI workflows are largely CAD-agnostic, so we adapt to your stack.</p></div>
+ </div>
+ <div class="qa reveal">
+ <button class="qa-q"><span data-i18n="faq.q3">How do you price a first engagement?</span> <span class="ic"></span></button>
+ <div class="qa-a"><p data-i18n="faq.a3">Pilots are fixed-scope and fixed-price, typically €1,500–€8,000 for automation. AI tooling runs €3,000–€20,000 plus a small monthly retainer. You see the estimate before any work starts.</p></div>
+ </div>
+ <div class="qa reveal">
+ <button class="qa-q"><span data-i18n="faq.q4">How fast can we see results?</span> <span class="ic"></span></button>
+ <div class="qa-a"><p data-i18n="faq.a4">A focused automation pilot is usually mapped, built and demoed on your own drawings within a few weeks quantified against the hours it replaces.</p></div>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- ===== CTA + contact ===== -->
+ <section class="section cta-band" id="contact">
+ <div class="wrap tilt-stage">
+ <div class="tablet-frame tilt-card" data-scroll-tilt>
+ <div class="cta-card">
+ <div class="cta-left">
+ <span class="eyebrow" data-i18n="contact.eyebrow">Start a pilot</span>
+ <h2 data-i18n="contact.h2">Pick one painful workflow. We'll automate it.</h2>
+ <p data-i18n="contact.p">Tell us where the hours go. We'll come back with a fixed-scope pilot and a realistic estimate of the time it saves.</p>
+ <ul class="cta-points">
+ <li data-i18n="contact.pt1">Fixed scope, fixed price no open-ended retainers to start</li>
+ <li data-i18n="contact.pt2">Proven on your own parts and drawings</li>
+ <li data-i18n="contact.pt3">Reply within two business days</li>
+ </ul>
+ </div>
+ <form class="contact" id="contactForm" novalidate>
+ <div class="field row2">
+ <div class="field" style="gap:7px;">
+ <label for="name" data-i18n="form.name">Name</label>
+ <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="form.name_ph" required />
+ <span class="errmsg" data-i18n="form.name_err">Please enter your name.</span>
+ </div>
+ <div class="field" style="gap:7px;">
+ <label for="company" data-i18n="form.company">Company</label>
+ <input id="company" name="company" type="text" placeholder="Company" data-i18n-ph="form.company_ph" />
+ </div>
+ </div>
+ <div class="field">
+ <label for="email" data-i18n="form.email">Work email</label>
+ <input id="email" name="email" type="email" placeholder="you@company.com" required />
+ <span class="errmsg" data-i18n="form.email_err">Enter a valid email address.</span>
+ </div>
+ <div class="field">
+ <label for="topic" data-i18n="form.topic">What do you need?</label>
+ <select id="topic" name="topic">
+ <option data-i18n="form.topic1">CAD automation (iLogic / macros)</option>
+ <option data-i18n="form.topic2">AI for design</option>
+ <option data-i18n="form.topic3">Custom software &amp; apps</option>
+ <option data-i18n="form.topic4">Not sure yet let's talk</option>
+ </select>
+ </div>
+ <div class="field">
+ <label for="msg" data-i18n="form.msg">The workflow that hurts most</label>
+ <textarea id="msg" name="msg" placeholder="e.g. numbering 140+ drawings per project by hand…" data-i18n-ph="form.msg_ph"></textarea>
+ </div>
+ <button type="submit" class="btn btn-primary" style="justify-content:center;"><span data-i18n="form.submit">Book a discovery call</span> <span class="arw">→</span></button>
+ <div class="form-ok" id="formOk" data-i18n="form.ok">✓ Thanks we'll be in touch within two business days.</div>
+ </form>
+ </div>
+ </div>
+ <div class="social-row">
+ <span class="social-row-lbl">Follow SPM</span>
+ <div class="social-row-icons">
+ <a href="https://www.linkedin.com/search/results/all/?keywords=SPM%20Design%20Solutions&origin=RICH_QUERY_TYPEAHEAD_HISTORY&heroEntityKey=urn%3Ali%3Aorganization%3A141713965&position=0" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4v1.5A5.5 5.5 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+ <a href="#" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+ <a href="#" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+ </div>
+ </div>
+ </div>
+ </section>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="ftr">
+ <div class="wrap">
+ <div class="ftr-top">
+ <div class="ftr-logo">
+ <img src="assets/brand/spm-lockup-stacked-white.png" alt="SPM Design Solutions" />
+ <p data-i18n="footer.tagline">CAD automation, AI and custom productivity software for engineering and industrial teams. Based in Belgium · serving the EU.</p>
+ </div>
+ <div class="ftr-col">
+ <h5 data-i18n="footer.services">Services</h5>
+ <a href="#services" data-i18n="footer.s1">CAD Automation</a>
+ <a href="#services" data-i18n="footer.s2">AI for Design</a>
+ <a href="#services" data-i18n="footer.s3">Productivity Apps</a>
+ <a href="#work" data-i18n="footer.s4">Case studies</a>
+ </div>
+ <div class="ftr-col">
+ <h5 data-i18n="footer.company">Company</h5>
+ <a href="#about" data-i18n="footer.c1">About</a>
+ <a href="#process" data-i18n="footer.c2">How it works</a>
+ <a href="#faq" data-i18n="footer.c3">FAQ</a>
+ <a href="#contact" data-i18n="footer.c4">Contact</a>
+ </div>
+ <div class="ftr-col">
+ <h5 data-i18n="footer.news">Technical newsletter</h5>
+ <p style="font-size:14px; color:#8a97a8;" data-i18n="footer.news_p">iLogic, Inventor and AI in design fortnightly, no fluff.</p>
+ <form class="news" id="newsForm">
+ <input type="email" placeholder="you@company.com" aria-label="Email" required />
+ <button type="submit" data-i18n="footer.news_join">Join</button>
+ </form>
+ <div id="newsOk" style="display:none; color:var(--green); font-family:'IBM Plex Mono',monospace; font-size:12px; margin-top:8px;" data-i18n="footer.news_ok">✓ Subscribed.</div>
+ </div>
+ </div>
+ <div class="ftr-bot">
+ <span>© 2026 SPM Design Solutions</span>
+ <span class="mono">Belgium · EU · ASME · EN 13480 · PED</span>
+ </div>
+ </div>
+ </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="site.js"></script>
+<script src="workflow-widget.js"></script>
+<script>
+(function(){
+ var canvas = document.getElementById('latticeBg');
+ var section = canvas && canvas.closest('.hero');
+ if (!canvas || !section) return;
+ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+ var ctx = canvas.getContext('2d', { alpha: true });
+ var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+ var mouse = { x: -1000, y: -1000, tx: -1000, ty: -1000 };
+ var pts = [];
+ var maxDist = 120, maxDistSq = maxDist * maxDist;
+ var strokeRGB = '10,29,55', accentRGB = '255,106,0';
+
+ function initPoints(w, h) {
+ pts = [];
+ var count = Math.min(Math.max(Math.floor((w * h) / 16000), 30), 70);
+ for (var i = 0; i < count; i++) {
+ pts.push({ x: Math.random() * w, y: Math.random() * h,
+ vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
+ pulse: Math.random() * Math.PI * 2, pulseSpeed: 1 + Math.random() });
+ }
+ }
+ function resize() {
+ var r = section.getBoundingClientRect();
+ W = r.width; H = r.height;
+ canvas.width = W * dpr; canvas.height = H * dpr;
+ canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+ ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+ initPoints(W, H);
+ }
+ resize();
+ new ResizeObserver(resize).observe(section);
+ section.addEventListener('mousemove', function (e) {
+ var r = section.getBoundingClientRect();
+ mouse.tx = e.clientX - r.left; mouse.ty = e.clientY - r.top;
+ }, { passive: true });
+ section.addEventListener('mouseleave', function () { mouse.tx = -1000; mouse.ty = -1000; }, { passive: true });
+
+ var last = performance.now();
+ function render(now) {
+ var dt = Math.min((now - last) / 1000, 0.033); last = now;
+ mouse.x += (mouse.tx - mouse.x) * 0.1; mouse.y += (mouse.ty - mouse.y) * 0.1;
+ ctx.clearRect(0, 0, W, H);
+ var n = pts.length;
+ for (var i = 0; i < n; i++) {
+ var p = pts[i]; p.pulse += dt * p.pulseSpeed;
+ p.x += p.vx * dt * 60; p.y += p.vy * dt * 60;
+ if (p.x < 0) { p.x = 0; p.vx *= -1; } else if (p.x > W) { p.x = W; p.vx *= -1; }
+ if (p.y < 0) { p.y = 0; p.vy *= -1; } else if (p.y > H) { p.y = H; p.vy *= -1; }
+ var dx = mouse.x - p.x, dy = mouse.y - p.y, dsq = dx * dx + dy * dy;
+ if (dsq < 32400 && dsq > 0) { var d = Math.sqrt(dsq), f = (1 - d / 180) * 22;
+ p.x -= (dx / d) * f * dt * 6; p.y -= (dy / d) * f * dt * 6; }
+ }
+ var cell = maxDist, cols = Math.max(1, Math.ceil(W / cell)), rows = Math.max(1, Math.ceil(H / cell));
+ var grid = []; for (var c = 0; c < cols; c++) { grid.push([]); for (var r2 = 0; r2 < rows; r2++) grid[c].push([]); }
+ for (i = 0; i < n; i++) {
+ var cc = Math.min(cols - 1, Math.max(0, Math.floor(pts[i].x / cell)));
+ var rr = Math.min(rows - 1, Math.max(0, Math.floor(pts[i].y / cell)));
+ grid[cc][rr].push(i);
+ }
+ for (c = 0; c < cols; c++) for (r2 = 0; r2 < rows; r2++) {
+ var cellPts = grid[c][r2], neigh = [];
+ for (var nc = Math.max(0, c - 1); nc <= Math.min(cols - 1, c + 1); nc++)
+ for (var nr = Math.max(0, r2 - 1); nr <= Math.min(rows - 1, r2 + 1); nr++)
+ for (var k = 0; k < grid[nc][nr].length; k++) neigh.push(grid[nc][nr][k]);
+ for (var ii = 0; ii < cellPts.length; ii++) {
+ var i1 = cellPts[ii], p1 = pts[i1];
+ for (var jj = 0; jj < neigh.length; jj++) {
+ var i2 = neigh[jj]; if (i1 >= i2) continue; var p2 = pts[i2];
+ var dx12 = p1.x - p2.x, dy12 = p1.y - p2.y; if (dx12*dx12+dy12*dy12 > maxDistSq) continue;
+ var midx = (p1.x+p2.x)/2, midy = (p1.y+p2.y)/2;
+ var mdx = mouse.x-midx, mdy = mouse.y-midy, mdsq = mdx*mdx+mdy*mdy;
+ var near = mdsq < 36100;
+ var a = near ? (1 - Math.sqrt(mdsq)/190) * 0.5 : 0.06;
+ ctx.strokeStyle = near ? 'rgba('+accentRGB+','+a.toFixed(2)+')' : 'rgba('+strokeRGB+','+a.toFixed(2)+')';
+ ctx.lineWidth = near ? 1 : 0.5;
+ ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+ }
+ }
+ }
+ for (i = 0; i < n; i++) {
+ var pn = pts[i]; var mdx2 = mouse.x-pn.x, mdy2 = mouse.y-pn.y; var isNear = mdx2*mdx2+mdy2*mdy2 < 32400;
+ var rad = 1.4 + Math.sin(pn.pulse) * 0.6;
+ ctx.fillStyle = isNear ? 'rgba('+accentRGB+',0.85)' : 'rgba('+strokeRGB+',0.28)';
+ ctx.beginPath(); ctx.arc(pn.x, pn.y, isNear ? 2.6 : rad, 0, Math.PI*2); ctx.fill();
+ }
+ requestAnimationFrame(render);
+ }
+ requestAnimationFrame(render);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DocVault CAD Automation case study | SPM Design Solutions</title>
+<meta name="description" content="How SPM built DocVault, a revision-aware document management system, for an engineering client drowning in drawing revisions." />
+<link rel="icon" type="image/png" href="assets/brand/spm-icon-256.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="site.css" />
+<style>
+ /* ===== Additions for this case-study page only reuses site.css tokens ===== */
+ .cs-hero{background:var(--paper); border-bottom:1px solid var(--line); padding:64px 0 0;}
+ .cs-crumb{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--grey-2); display:flex; align-items:center; gap:8px;}
+ .cs-crumb a{color:var(--grey); border-bottom:1px solid var(--line);}
+ .cs-crumb a:hover{color:var(--navy); border-color:var(--navy);}
+ .cs-hero h1{font-size:clamp(34px,4.6vw,54px); font-weight:800; margin-top:16px; max-width:18ch; text-wrap:balance;}
+ .cs-hero .hero-sub{max-width:640px;}
+ .cs-meta{display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); margin-top:44px;}
+ .cs-meta div{padding:20px 0; border-right:1px solid var(--line);}
+ .cs-meta div:last-child{border-right:none;}
+ .cs-meta .k{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--grey-2);}
+ .cs-meta .v{font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; color:var(--navy); margin-top:6px;}
+
+ .cs-demo{padding:56px 0 8px;}
+
+ .cs-quote{background:var(--navy); padding:80px 0;}
+ .cs-quote blockquote{margin:0; font-family:'Montserrat',sans-serif; font-weight:700; font-size:clamp(22px,3.2vw,32px); line-height:1.35; color:#fff; max-width:26ch; text-wrap:balance;}
+ .cs-quote .strike{text-decoration:line-through; opacity:.4;}
+ .cs-quote .o{color:var(--orange);}
+ .cs-quote .cite{margin-top:20px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8a97a8;}
+
+ /* feature cards: reuse .svc but content differs */
+ .cs-svc p{min-height:0;}
+
+ /* mock UI components */
+ .mock{border:1px solid var(--line); border-radius:var(--r); background:var(--paper); overflow:hidden; box-shadow:0 24px 60px -30px rgba(10,29,55,.28);}
+ .mock .mh{padding:11px 16px; border-bottom:1px solid var(--line); font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--grey-2); display:flex; align-items:center; justify-content:space-between;}
+ .mock .mb{padding:22px;}
+ .revchip{font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600; padding:4px 9px; border-radius:3px;}
+ .revchip.old{background:var(--line-2); color:var(--grey);}
+ .revchip.cur{background:rgba(50,195,106,.14); color:var(--green);}
+ .filepair{display:flex; align-items:center; gap:9px; margin-top:16px; font-size:12px;}
+ .fbadge{font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:700; color:#fff; padding:3px 6px; border-radius:3px;}
+ .fbadge.pdf{background:#C22B1F;} .fbadge.dwg{background:#2B6FC2;}
+ .fname{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--grey);}
+ .mini-tbl{width:100%; border-collapse:collapse; font-size:12px;}
+ .mini-tbl th{text-align:left; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:var(--grey-2); font-weight:500; padding:0 10px 8px 0;}
+ .mini-tbl td{padding:9px 10px 9px 0; border-top:1px solid var(--line-2);}
+ .mini-tbl tr:first-child td{border-top:none;}
+ .plink{font-size:10.5px; font-weight:600; border:1px solid var(--line); border-radius:4px; padding:3px 7px; color:var(--orange);}
+ .viewer{background:var(--navy); border-radius:var(--r); padding:18px;}
+ .viewer .tb{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
+ .viewer .z{display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:#cdd8e6;}
+ .viewer .zb{width:22px; height:22px; border-radius:3px; border:1px solid rgba(255,255,255,.2); color:#fff; display:flex; align-items:center; justify-content:center; font-size:13px;}
+ .viewer .cv{background:#fff; border-radius:3px; aspect-ratio:16/10; display:flex; align-items:center; justify-content:center;}
+ .viewer .cv svg{width:58%;}
+ .viewer .fl{color:#8a97a8; font-family:'IBM Plex Mono',monospace; font-size:10px; margin-top:10px;}
+ .search-mk{border:1px solid var(--line); border-radius:8px; padding:12px 14px; display:flex; align-items:center; gap:10px; background:var(--cloud);}
+ .search-mk .q{font-size:13px; color:var(--navy);}
+ .interp{margin-top:12px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--grey-2);}
+ .interp b{color:var(--orange);}
+ .sresult{margin-top:14px; display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border:1px solid var(--line); border-radius:6px;}
+ .sresult .rn{font-size:12.5px; font-weight:600; color:var(--navy);}
+ .sresult .rs{font-size:11px; color:var(--grey-2);}
+ .tree{font-size:13px;}
+ .tree .p{font-weight:700; color:var(--orange); padding:6px 0;}
+ .tree .e{display:flex; align-items:center; justify-content:space-between; padding:7px 0 7px 18px; border-left:1px solid var(--line); margin-left:3px; color:var(--ink-2);}
+ .tree .e.active{color:var(--orange); font-weight:600;}
+ .tree .cnt{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--grey-2);}
+
+ .cs-stat{background:var(--navy); text-align:center; padding:96px 0;}
+ .cs-stat .num{font-family:'Montserrat',sans-serif; font-weight:800; color:var(--orange); font-size:clamp(80px,14vw,150px); line-height:.85;}
+ .cs-stat .lbl{font-family:'Inter',sans-serif; font-weight:600; letter-spacing:.16em; text-transform:uppercase; font-size:14px; color:#fff; margin-top:2px;}
+ .cs-stat .sub{max-width:46ch; margin:20px auto 0; color:#aeb9c7; font-size:15.5px; line-height:1.6;}
+ .cs-facts{display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:38px;}
+ .cs-facts span{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#cdd8e6; border:1px solid rgba(255,255,255,.16); padding:8px 14px; border-radius:3px;}
+
+ .cs-cta{background:var(--cloud); padding:96px 0; text-align:center;}
+ .cs-cta h2{font-size:clamp(28px,3.6vw,42px); font-weight:800; max-width:20ch; margin:14px auto 0; text-wrap:balance;}
+ .cs-cta p{max-width:52ch; margin:20px auto 0; color:var(--ink-2); font-size:16px; line-height:1.6;}
+ .cs-cta .actions{display:flex; justify-content:center; gap:14px; margin-top:32px; flex-wrap:wrap;}
+
+ @media (max-width:760px){
+ .cs-meta{grid-template-columns:1fr 1fr;}
+ .cs-meta div:nth-child(2){border-right:none;}
+ }
+</style>
+</head>
+<body>
+
+<!-- ===== Header (same as homepage; anchors point back to it) ===== -->
+<header class="hdr" id="hdr">
+ <div class="wrap hdr-in">
+ <a class="hdr-logo" href="SPM Home (logo + video banner).html#top" aria-label="SPM Design Solutions"><img src="assets/brand/spm-wordmark-color.png" alt="SPM Design Solutions" /></a>
+ <nav class="nav">
+ <a href="SPM Home (logo + video banner).html#services" data-i18n="nav.services">Services</a>
+ <a href="SPM Home (logo + video banner).html#work" data-i18n="nav.work">Work</a>
+ <a href="SPM Home (logo + video banner).html#courses" data-i18n="nav.courses">Courses</a>
+ <a href="SPM Home (logo + video banner).html#about" data-i18n="nav.about">About</a>
+ <a href="SPM Home (logo + video banner).html#faq" data-i18n="nav.faq">FAQ</a>
+ </nav>
+ <div class="hdr-cta">
+ <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
+ <button type="button" data-lang="en" class="on">EN</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="es">ES</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="nl">NL</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="de">DE</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="fr">FR</button>
+ </div>
+ <a href="SPM Home (logo + video banner).html#contact" class="btn btn-primary"><span data-i18n="cta.book">Book a call</span> <span class="arw">→</span></a>
+ <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+ <span></span><span></span><span></span>
+ </button>
+ </div>
+ </div>
+ <div class="mobile-nav" id="mobileNav">
+ <a href="SPM Home (logo + video banner).html#services" data-i18n="nav.services">Services</a>
+ <a href="SPM Home (logo + video banner).html#work" data-i18n="nav.work">Work</a>
+ <a href="SPM Home (logo + video banner).html#courses" data-i18n="nav.courses">Courses</a>
+ <a href="SPM Home (logo + video banner).html#about" data-i18n="nav.about">About</a>
+ <a href="SPM Home (logo + video banner).html#faq" data-i18n="nav.faq">FAQ</a>
+ <a href="SPM Home (logo + video banner).html#contact" class="btn btn-primary"><span data-i18n="cta.book">Book a call</span> →</a>
+ <div class="mobile-lang" role="group" aria-label="Language">
+ <span class="ml-lbl">Lang</span>
+ <button type="button" data-lang="en" class="on">EN</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="es">ES</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="nl">NL</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="de">DE</button>
+ <span class="sep">·</span>
+ <button type="button" data-lang="fr">FR</button>
+ </div>
+ </div>
+</header>
+
+<main id="top">
+
+ <!-- ===== Case study hero ===== -->
+ <section class="cs-hero">
+ <div class="wrap">
+ <div class="cs-crumb reveal in">
+ <a href="SPM Home (logo + video banner).html#work">Work</a> <span>/</span> <span>DocVault</span>
+ </div>
+ <span class="eyebrow reveal in">Client case · confidential</span>
+ <h1 class="reveal in">Your drawings stop living in a Windows folder.</h1>
+ <p class="hero-sub reveal in">An industrial engineering client came to SPM with the classic problem: hundreds of drawings spread across shared folders and email threads, no one sure which revision was actually current. We built DocVault a revision-aware document system that detects the current revision on its own and delivered it in a single working session.</p>
+ <div class="hero-actions reveal in">
+ <a href="SPM Home (logo + video banner).html#contact" class="btn btn-primary"><span>Get this for your team</span> <span class="arw">→</span></a>
+ <a href="#build" class="btn btn-ghost">See how it works</a>
+ </div>
+ <div class="cs-meta reveal in">
+ <div><div class="k mono">Client</div><div class="v">Engineering &amp; Fabrication (confidential)</div></div>
+ <div><div class="k mono">Delivered in</div><div class="v">1 working session</div></div>
+ <div><div class="k mono">Stack</div><div class="v">React · Node · SQLite</div></div>
+ <div><div class="k mono">Category</div><div class="v">CAD Automation</div></div>
+ </div>
+ </div>
+ </section>
+
+ <!-- ===== Demo ===== -->
+ <section class="cs-demo">
+ <div class="wrap">
+ <div class="demo reveal in">
+ <video src="assets/SPM_DocVault_1x1.mp4" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"></video>
+ </div>
+ </div>
+ </section>
+
+ <!-- ===== Quote / problem ===== -->
+ <section class="cs-quote">
+ <div class="wrap">
+ <blockquote class="reveal in">
+ The email says <span class="strike">“Rev2”</span>. The folder says <span class="strike">“Rev2_final_v3”</span>.
+ <span class="o">Nobody knew which one was current.</span>
+ </blockquote>
+ <div class="cite reveal in">- how the client described their drawing repository before DocVault</div>
+ </div>
+ </section>
+
+ <!-- ===== Capabilities (reuses .svc-grid / .svc) ===== -->
+ <section class="section" id="build">
+ <div class="wrap">
+ <div class="sec-head reveal in">
+ <span class="eyebrow">What we delivered</span>
+ <h2>Five things it does on its own no plugins, no templates to fill in.</h2>
+ <p>Every capability below is running in the delivered build, not a mockup of a plan.</p>
+ </div>
+
+ <div class="svc-grid" style="margin-top:52px;">
+ <article class="svc cs-svc reveal in">
+ <span class="no">01 / Parsing engine</span>
+ <h3>Revisions detected from the real filename</h3>
+ <p>When a PDF and its DWG share a name, they're grouped as the same revision not two different ones. Sheet numbers (<span class="mono">sht;001</span>, <span class="mono">sht;002</span>…) become separate documents instead of fake revisions.</p>
+ <div class="mock" style="margin-top:18px;">
+ <div class="mh"><span>2401AB_Roof_platform_r1_0519</span></div>
+ <div class="mb">
+ <div style="display:flex;gap:8px;flex-wrap:wrap;">
+ <span class="revchip old">Rev0</span>
+ <span class="revchip cur">Rev1 ✓ current</span>
+ </div>
+ <div class="filepair">
+ <span class="fbadge pdf">PDF</span><span class="fname">...r1_0519.pdf</span>
+ <span style="color:var(--grey-2);">=</span>
+ <span class="fbadge dwg">DWG</span><span class="fname">...r1_0519.dwg</span>
+ </div>
+ </div>
+ </div>
+ </article>
+
+ <article class="svc cs-svc reveal in">
+ <span class="no">02 / Document register</span>
+ <h3>A real register, not a folder of 400 files</h3>
+ <p>Name, real revision date, current rev. and a direct link always pointing at what's current. Nothing is ever deleted; every prior revision stays on record.</p>
+ <div class="mock" style="margin-top:18px;">
+ <div class="mh"><span>D45-D2401A register</span></div>
+ <div class="mb">
+ <table class="mini-tbl">
+ <thead><tr><th>Document</th><th>Date</th><th>Rev.</th><th>PDF</th><th>DWG</th></tr></thead>
+ <tbody>
+ <tr><td>GA-2401</td><td class="mono">19/05/25</td><td><span class="revchip cur">Rev2</span></td><td><span class="plink">View</span></td><td><span class="plink">View</span></td></tr>
+ <tr><td>Nozzle Orientation</td><td class="mono">02/06/25</td><td><span class="revchip cur">Rev1</span></td><td><span class="plink">View</span></td><td>-</td></tr>
+ </tbody>
+ </table>
+ </div>
+ </div>
+ </article>
+
+ <article class="svc cs-svc reveal in">
+ <span class="no">03 / Own viewer</span>
+ <h3>PDF renders in-app, full screen on demand</h3>
+ <p>Drawings render inside the app instead of depending on the browser's own PDF handling no "download instead of view" surprises. One click expands to full screen with zoom.</p>
+ <div class="viewer" style="margin-top:18px;">
+ <div class="tb">
+ <span class="fl mono" style="margin:0;">GA-2401_r2.pdf</span>
+ <div class="z"><span class="zb">−</span><span>150%</span><span class="zb">+</span></div>
+ </div>
+ <div class="cv">
+ <svg viewBox="0 0 200 140" fill="none" stroke="#0A1D37" stroke-width="0.6">
+ <rect x="8" y="8" width="184" height="124" />
+ <circle cx="100" cy="70" r="42" />
+ <line x1="100" y1="18" x2="100" y2="122" /><line x1="48" y1="70" x2="152" y2="70" />
+ <circle cx="100" cy="70" r="3" fill="#FF6A00" stroke="none" />
+ </svg>
+ </div>
+ </div>
+ </article>
+
+ <article class="svc cs-svc reveal in">
+ <span class="no">04 / Search</span>
+ <h3>Search the way you'd say it, not file it</h3>
+ <p>A lightweight intent engine bridges Spanish/English technical vocabulary (tanque↔tank, bomba↔pump) and understands phrases like "latest drawing of" or "recently added" without manual filters.</p>
+ <div class="mock" style="margin-top:18px;">
+ <div class="mb">
+ <div class="search-mk"><span style="opacity:.5;">⌕</span><span class="q">último plano del tanque sulfur</span></div>
+ <div class="interp">interpreted as: <b>"tanque tank sulfur"</b> · latest revision</div>
+ <div class="sresult"><div><div class="rn">GA-2401 · General Arrangement</div><div class="rs">A9519 / D45-D2401A</div></div><span class="revchip cur">Rev2 ✓</span></div>
+ </div>
+ </div>
+ </article>
+
+ <article class="svc cs-svc reveal in">
+ <span class="no">05 / Structure</span>
+ <h3>The hierarchy the client's team already used</h3>
+ <p>Documents live under Project → Equipment, mirroring the tag numbering already used on the shop floor not a new taxonomy the team had to learn.</p>
+ <div class="mock" style="margin-top:18px;">
+ <div class="mb tree">
+ <div class="p">A9519 SAMSUNG FADHILI IV</div>
+ <div class="e active">D45-D2401A · Sulfur Storage Tank <span class="cnt">6</span></div>
+ <div class="e">D45-D2402 · Condensate Tank <span class="cnt">3</span></div>
+ <div class="e">D45-P2101 · Pump <span class="cnt">2</span></div>
+ </div>
+ </div>
+ </article>
+
+ <article class="svc cs-svc reveal in" style="background:var(--navy); border-color:var(--navy);">
+ <span class="no" style="color:var(--orange);">Why it matters</span>
+ <h3 style="color:#fff;">This is the kind of thing we deliver for clients</h3>
+ <p style="color:#aeb9c7;">DocVault shipped for one engineering client, but the same automation approach applies to drawing numbering, BOM sync, revision control and AI design checks inside your own CAD environment.</p>
+ <a href="SPM Home (logo + video banner).html#services" class="btn btn-ghost on-dark" style="margin-top:auto;">See the services →</a>
+ </article>
+ </div>
+ </div>
+ </section>
+
+ <!-- ===== Stat strip ===== -->
+ <section class="cs-stat">
+ <div class="wrap">
+ <div class="num reveal in">1</div>
+ <div class="lbl reveal in">Working session</div>
+ <p class="sub reveal in">From spec to running system, with no backlog and no slide deck in between. That's how SPM works: straight to what runs.</p>
+ <div class="cs-facts reveal in">
+ <span>React + TypeScript</span>
+ <span>Node + Express + Prisma</span>
+ <span>pdf.js no browser plugins</span>
+ <span>SQLite → scales to PostgreSQL</span>
+ </div>
+ </div>
+ </section>
+
+ <!-- ===== Closing CTA ===== -->
+ <section class="cs-cta">
+ <div class="wrap">
+ <span class="eyebrow reveal in">Start a pilot</span>
+ <h2 class="reveal in">Still searching for drawings by filename?</h2>
+ <p class="reveal in">This is what SPM does: custom systems that automate the repetitive parts of engineering CAD, documentation, revision workflows. If your drawing process is a mess of folders and emails, let's talk about what yours would look like.</p>
+ <div class="actions reveal in">
+ <a href="SPM Home (logo + video banner).html#contact" class="btn btn-primary"><span>Talk to SPM</span> <span class="arw">→</span></a>
+ </div>
+ </div>
+ </section>
+
+</main>
+
+<!-- ===== Footer (same as homepage) ===== -->
+<footer class="ftr">
+ <div class="wrap">
+ <div class="ftr-top">
+ <div class="ftr-logo">
+ <img src="assets/brand/spm-lockup-stacked-white.png" alt="SPM Design Solutions" />
+ <p data-i18n="footer.tagline">CAD automation, AI and technical training for industrial mechanical design. Based in Belgium · serving the EU.</p>
+ </div>
+ <div class="ftr-col">
+ <h5 data-i18n="footer.services">Services</h5>
+ <a href="SPM Home (logo + video banner).html#services" data-i18n="footer.s1">CAD Automation</a>
+ <a href="SPM Home (logo + video banner).html#services" data-i18n="footer.s2">AI for Design</a>
+ <a href="SPM Home (logo + video banner).html#courses" data-i18n="footer.s3">Training &amp; Courses</a>
+ <a href="SPM Home (logo + video banner).html#work" data-i18n="footer.s4">Case studies</a>
+ </div>
+ <div class="ftr-col">
+ <h5 data-i18n="footer.company">Company</h5>
+ <a href="SPM Home (logo + video banner).html#about" data-i18n="footer.c1">About</a>
+ <a href="SPM Home (logo + video banner).html#process" data-i18n="footer.c2">How it works</a>
+ <a href="SPM Home (logo + video banner).html#faq" data-i18n="footer.c3">FAQ</a>
+ <a href="SPM Home (logo + video banner).html#contact" data-i18n="footer.c4">Contact</a>
+ </div>
+ <div class="ftr-col">
+ <h5 data-i18n="footer.news">Technical newsletter</h5>
+ <p style="font-size:14px; color:#8a97a8;" data-i18n="footer.news_p">iLogic, Inventor and AI in design fortnightly, no fluff.</p>
+ <form class="news" id="newsForm">
+ <input type="email" placeholder="you@company.com" aria-label="Email" required />
+ <button type="submit" data-i18n="footer.news_join">Join</button>
+ </form>
+ <div id="newsOk" style="display:none; color:var(--green); font-family:'IBM Plex Mono',monospace; font-size:12px; margin-top:8px;" data-i18n="footer.news_ok">✓ Subscribed.</div>
+ </div>
+ </div>
+ <div class="ftr-bot">
+ <span>© 2026 SPM Design Solutions</span>
+ <span class="mono">Belgium · EU · ASME · EN 13480 · PED</span>
+ </div>
+ </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="site.js"></script>
+</body>
+</html>
