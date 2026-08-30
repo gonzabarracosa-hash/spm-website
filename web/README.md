@@ -52,6 +52,26 @@ this site is deployed.
   standalone file it was ported from). Header/Footer links use `/#section`
   so in-page navigation still works when you're on this subpage.
 
+## SEO
+
+- `NEXT_PUBLIC_SITE_URL` (see `.env.example`) drives canonical links, Open
+  Graph/Twitter URLs, `sitemap.xml` and `robots.txt` — set it in Vercel to
+  the real domain once one is connected (falls back to a placeholder
+  otherwise).
+- `app/layout.js` sets title/description/keywords, Open Graph + Twitter
+  card metadata, and JSON-LD `ProfessionalService` structured data
+  (`lib/site.js` holds the shared copy).
+- `app/opengraph-image.jsx` generates the social-preview image (1200×630)
+  on the fly — no static asset to keep in sync.
+- `app/robots.js` and `app/sitemap.js` generate `/robots.txt` and
+  `/sitemap.xml`.
+- Not done: the site is one URL with client-side language switching
+  (EN/ES/NL/DE/FR), so there's no per-language URL to give Google separate
+  indexable pages or `hreflang` tags for. Real multilingual SEO would need
+  routing each language to its own path (e.g. `/es`, `/de`) — a bigger
+  change than adding meta tags, worth a separate task if it matters for
+  ranking in non-English markets.
+
 ## Not included
 
 The language-variant/shareable/standalone home files (`SPM Home (logo +
