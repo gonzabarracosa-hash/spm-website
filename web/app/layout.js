@@ -1,6 +1,16 @@
 import './globals.css';
 import { LanguageProvider } from '../components/LanguageProvider';
-import { INSTAGRAM_URL, LINKEDIN_URL, SITE_DESCRIPTION, SITE_KEYWORDS, SITE_NAME, SITE_TITLE, SITE_URL } from '../lib/site';
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  INSTAGRAM_URL,
+  LINKEDIN_URL,
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+} from '../lib/site';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -49,6 +59,8 @@ const organizationJsonLd = {
   logo: SITE_URL + '/assets/brand/spm-wordmark-color.png',
   image: SITE_URL + '/assets/brand/spm-wordmark-color.png',
   description: SITE_DESCRIPTION,
+  email: CONTACT_EMAIL,
+  telephone: CONTACT_PHONE,
   areaServed: ['Belgium', 'Germany', 'Netherlands', 'Switzerland', 'European Union'],
   address: {
     '@type': 'PostalAddress',

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useI18n } from './LanguageProvider';
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY } from '../lib/site';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -43,6 +44,14 @@ export default function Footer() {
           <div className="ftr-logo">
             <img src="/assets/brand/spm-lockup-stacked-white.png" alt="SPM Design Solutions" />
             <p>{t('footer.tagline')}</p>
+            <div className="mono" style={{ marginTop: 16, fontSize: 13, display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <a href={'mailto:' + CONTACT_EMAIL} style={{ color: '#c7d0da' }}>
+                {CONTACT_EMAIL}
+              </a>
+              <a href={'tel:' + CONTACT_PHONE} style={{ color: '#c7d0da' }}>
+                {CONTACT_PHONE_DISPLAY}
+              </a>
+            </div>
           </div>
           <div className="ftr-col">
             <h5>{t('footer.services')}</h5>

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from './LanguageProvider';
-import { INSTAGRAM_URL, LINKEDIN_URL } from '../lib/site';
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, INSTAGRAM_URL, LINKEDIN_URL } from '../lib/site';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -112,6 +112,14 @@ export default function Contact() {
                 <li>{t('contact.pt2')}</li>
                 <li>{t('contact.pt3')}</li>
               </ul>
+              <div className="mono" style={{ marginTop: 28, paddingTop: 20, borderTop: '1px solid var(--line)', fontSize: 14, color: 'var(--ink-2)', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <a href={'mailto:' + CONTACT_EMAIL} style={{ color: 'var(--navy)' }}>
+                  {CONTACT_EMAIL}
+                </a>
+                <a href={'tel:' + CONTACT_PHONE} style={{ color: 'var(--navy)' }}>
+                  {CONTACT_PHONE_DISPLAY}
+                </a>
+              </div>
             </div>
             <form className="contact" id="contactForm" noValidate ref={formRef} onSubmit={onSubmit}>
               <div className="field row2">

@@ -17,3 +17,6 @@ export const SITE_KEYWORDS = [
 ];
 export const LINKEDIN_URL = 'https://www.linkedin.com/company/spm-design-solutions/';
 export const INSTAGRAM_URL = 'https://www.instagram.com/spmdesignsolutions/';
+export const CONTACT_EMAIL = 'info@spmdesignsolutions.com';
+export const CONTACT_PHONE = '+32456893352';
+export const CONTACT_PHONE_DISPLAY = '+32 456 89 33 52';
