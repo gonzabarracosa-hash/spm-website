@@ -9,8 +9,6 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
 /* "Work email" field: block the big free/consumer webmail providers so
    leads come in on a company domain instead of a personal inbox. */
 const FREE_EMAIL_DOMAINS = new Set([
-  'gmail.com',
-  'googlemail.com',
   'yahoo.com',
   'yahoo.co.uk',
   'hotmail.com',
