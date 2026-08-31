@@ -287,7 +287,17 @@ form.contact{padding:46px 48px; display:flex; flex-direction:column; gap:16px;}
 .errmsg{color:#e0443e; font-size:12px; font-family:'IBM Plex Mono',monospace; display:none;}
 .field.err .errmsg{display:block;}
 .form-ok{display:none; align-items:center; gap:10px; color:var(--green); font-family:'Montserrat',sans-serif; font-weight:600; font-size:15px;}
-.form-ok.show{display:flex;}
+.form-ok.show{display:flex; animation:formOkIn .4s ease both;}
+@keyframes formOkIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+.form-ok-check{width:22px; height:22px; flex:0 0 auto;}
+.form-ok-check circle{fill:none; stroke:currentColor; stroke-width:2; stroke-dasharray:64; stroke-dashoffset:64; animation:formOkCircle .5s ease forwards;}
+.form-ok-check path{fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:20; stroke-dashoffset:20; animation:formOkCheck .3s ease forwards .45s;}
+@keyframes formOkCircle{to{stroke-dashoffset:0;}}
+@keyframes formOkCheck{to{stroke-dashoffset:0;}}
+@media (prefers-reduced-motion: reduce){
+  .form-ok.show{animation:none;}
+  .form-ok-check circle,.form-ok-check path{animation:none; stroke-dashoffset:0;}
+}
 
 /* ===== Footer ===== */
 .ftr{background:var(--navy); color:#aeb9c7; padding:64px 0 36px;}

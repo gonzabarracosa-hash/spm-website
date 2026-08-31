@@ -4,7 +4,42 @@ import { useEffect, useRef, useState } from 'react';
 import { useI18n } from './LanguageProvider';
 import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, INSTAGRAM_URL, LINKEDIN_URL, WHATSAPP_URL } from '../lib/site';
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+
+/* "Work email" field: block the big free/consumer webmail providers so
+   leads come in on a company domain instead of a personal inbox. */
+const FREE_EMAIL_DOMAINS = new Set([
+  'gmail.com',
+  'googlemail.com',
+  'yahoo.com',
+  'yahoo.co.uk',
+  'hotmail.com',
+  'hotmail.co.uk',
+  'outlook.com',
+  'outlook.es',
+  'live.com',
+  'msn.com',
+  'icloud.com',
+  'me.com',
+  'aol.com',
+  'gmx.com',
+  'gmx.net',
+  'mail.com',
+  'proton.me',
+  'protonmail.com',
+  'yandex.com',
+  'zoho.com',
+  'web.de',
+  't-online.de',
+]);
+
+function getEmailError(value) {
+  const trimmed = value.trim();
+  if (!EMAIL_RE.test(trimmed)) return 'invalid';
+  const domain = trimmed.split('@')[1]?.toLowerCase();
+  if (domain && FREE_EMAIL_DOMAINS.has(domain)) return 'personal';
+  return null;
+}
 
 /* Contact-form submissions are wired to Formspree. Set
    NEXT_PUBLIC_FORMSPREE_CONTACT_ENDPOINT (e.g. https://formspree.io/f/xxxxxxx)
@@ -53,7 +88,7 @@ export default function Contact() {
   const formRef = useRef(null);
   useScrollTilt(tiltRef);
 
-  const [errors, setErrors] = useState({ name: false, email: false });
+  const [errors, setErrors] = useState({ name: false, email: null });
   const [status, setStatus] = useState('idle'); // idle | sending | ok | error
   const [disabled, setDisabled] = useState(false);
 
@@ -63,13 +98,14 @@ export default function Contact() {
     const name = form.querySelector('#name');
     const email = form.querySelector('#email');
     let ok = true;
-    const nextErrors = { name: false, email: false };
+    const nextErrors = { name: false, email: null };
     if (!name.value.trim()) {
       nextErrors.name = true;
       ok = false;
     }
-    if (!EMAIL_RE.test(email.value.trim())) {
-      nextErrors.email = true;
+    const emailError = getEmailError(email.value);
+    if (emailError) {
+      nextErrors.email = emailError;
       ok = false;
     }
     setErrors(nextErrors);
@@ -96,7 +132,8 @@ export default function Contact() {
     }
   };
 
-  const clearError = (field) => setErrors((e) => (e[field] ? { ...e, [field]: false } : e));
+  const clearError = (field, emptyValue = false) =>
+    setErrors((e) => (e[field] ? { ...e, [field]: emptyValue } : e));
 
   return (
     <section className="section cta-band" id="contact">
@@ -150,9 +187,9 @@ export default function Contact() {
                   placeholder="you@company.com"
                   required
                   disabled={disabled}
-                  onInput={() => clearError('email')}
+                  onInput={() => clearError('email', null)}
                 />
-                <span className="errmsg">{t('form.email_err')}</span>
+                <span className="errmsg">{errors.email === 'personal' ? t('form.email_personal_err') : t('form.email_err')}</span>
               </div>
               <div className="field">
                 <label htmlFor="topic">{t('form.topic')}</label>
@@ -170,7 +207,15 @@ export default function Contact() {
               <button type="submit" className="btn btn-primary" style={{ justifyContent: 'center' }} disabled={disabled}>
                 <span>{t('form.submit')}</span> <span className="arw">→</span>
               </button>
-              {status === 'ok' && <div className="form-ok show">{t('form.ok')}</div>}
+              {status === 'ok' && (
+                <div className="form-ok show">
+                  <svg className="form-ok-check" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M7 12.5l3 3 7-7" />
+                  </svg>
+                  <span>{t('form.ok')}</span>
+                </div>
+              )}
               {status === 'error' && (
                 <div className="form-ok show" style={{ color: '#e0443e' }}>
                   {t('form.err')}
