@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from './LanguageProvider';
-import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, INSTAGRAM_URL, LINKEDIN_URL } from '../lib/site';
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, INSTAGRAM_URL, LINKEDIN_URL, WHATSAPP_URL } from '../lib/site';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -182,6 +182,11 @@ export default function Contact() {
         <div className="social-row">
           <span className="social-row-lbl">Follow SPM</span>
           <div className="social-row-icons">
+            <a href={WHATSAPP_URL} aria-label="WhatsApp" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2zm0 1.67c2.19 0 4.25.85 5.79 2.4a8.18 8.18 0 0 1 2.41 5.84c0 4.55-3.7 8.24-8.25 8.24a8.24 8.24 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.55 3.7-8.24 8.29-8.24zm-4.53 4.7c-.15 0-.4.06-.61.3-.21.24-.8.78-.8 1.9s.82 2.2.93 2.35c.11.15 1.6 2.5 3.93 3.44.55.24.98.38 1.31.48.55.17 1.05.15 1.44.09.44-.06 1.36-.55 1.55-1.09.19-.54.19-1 .13-1.09-.06-.09-.21-.15-.44-.26-.23-.12-1.36-.67-1.57-.75-.21-.08-.36-.12-.51.12-.15.24-.59.75-.72.9-.13.15-.27.17-.5.06-.23-.12-.98-.36-1.87-1.15-.69-.62-1.16-1.38-1.29-1.62-.13-.24-.01-.36.1-.48.1-.11.23-.28.34-.42.11-.14.15-.24.23-.4.08-.16.04-.3-.02-.42-.06-.12-.51-1.26-.72-1.72-.19-.44-.38-.38-.51-.39-.13-.01-.28-.01-.42-.01z" />
+              </svg>
+            </a>
             <a href={LINKEDIN_URL} aria-label="LinkedIn" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4v1.5A5.5 5.5 0 0 1 16 8z" />
