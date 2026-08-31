@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from './LanguageProvider';
+import { INSTAGRAM_URL, LINKEDIN_URL } from '../lib/site';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -173,19 +174,14 @@ export default function Contact() {
         <div className="social-row">
           <span className="social-row-lbl">Follow SPM</span>
           <div className="social-row-icons">
-            <a
-              href="https://www.linkedin.com/search/results/all/?keywords=SPM%20Design%20Solutions&origin=RICH_QUERY_TYPEAHEAD_HISTORY&heroEntityKey=urn%3Ali%3Aorganization%3A141713965&position=0"
-              aria-label="LinkedIn"
-              target="_blank"
-              rel="noopener"
-            >
+            <a href={LINKEDIN_URL} aria-label="LinkedIn" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4v1.5A5.5 5.5 0 0 1 16 8z" />
                 <rect x="2" y="9" width="4" height="12" />
                 <circle cx="4" cy="4" r="2" />
               </svg>
             </a>
-            <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+            <a href={INSTAGRAM_URL} aria-label="Instagram" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" />
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />

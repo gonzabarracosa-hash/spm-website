@@ -1,6 +1,6 @@
 import './globals.css';
 import { LanguageProvider } from '../components/LanguageProvider';
-import { LINKEDIN_URL, SITE_DESCRIPTION, SITE_KEYWORDS, SITE_NAME, SITE_TITLE, SITE_URL } from '../lib/site';
+import { INSTAGRAM_URL, LINKEDIN_URL, SITE_DESCRIPTION, SITE_KEYWORDS, SITE_NAME, SITE_TITLE, SITE_URL } from '../lib/site';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -54,7 +54,7 @@ const organizationJsonLd = {
     '@type': 'PostalAddress',
     addressCountry: 'BE',
   },
-  sameAs: [LINKEDIN_URL],
+  sameAs: [LINKEDIN_URL, INSTAGRAM_URL],
   knowsAbout: [
     'CAD automation',
     'Autodesk Inventor iLogic',

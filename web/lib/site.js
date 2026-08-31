@@ -15,5 +15,5 @@ export const SITE_KEYWORDS = [
   'industrial equipment design software',
   'ASME EN 13480 PED design checks',
 ];
-export const LINKEDIN_URL =
-  'https://www.linkedin.com/search/results/all/?keywords=SPM%20Design%20Solutions&origin=RICH_QUERY_TYPEAHEAD_HISTORY&heroEntityKey=urn%3Ali%3Aorganization%3A141713965&position=0';
+export const LINKEDIN_URL = 'https://www.linkedin.com/company/spm-design-solutions/';
+export const INSTAGRAM_URL = 'https://www.instagram.com/spmdesignsolutions/';
