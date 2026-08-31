@@ -10,7 +10,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
    NEXT_PUBLIC_FORMSPREE_CONTACT_ENDPOINT (e.g. https://formspree.io/f/xxxxxxx)
    once a form/endpoint exists — until then the form still validates and
    shows the same success state, it just doesn't send anywhere. */
-const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_ENDPOINT || '';
+const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_ENDPOINT || 'https://formspree.io/f/xgaeonel';
 
 function useScrollTilt(ref) {
   useEffect(() => {
