@@ -60,7 +60,6 @@ export default function Header() {
         <nav className="nav">
           <a href="/#services">{t('nav.services')}</a>
           <a href="/#work">{t('nav.work')}</a>
-          <a href="/#about">{t('nav.about')}</a>
           <a href="/#faq">{t('nav.faq')}</a>
         </nav>
         <div className="hdr-cta">
@@ -86,7 +85,6 @@ export default function Header() {
       <div className={'mobile-nav' + (menuOpen ? ' open' : '')} id="mobileNav">
         <a href="/#services" onClick={closeMenu}>{t('nav.services')}</a>
         <a href="/#work" onClick={closeMenu}>{t('nav.work')}</a>
-        <a href="/#about" onClick={closeMenu}>{t('nav.about')}</a>
         <a href="/#faq" onClick={closeMenu}>{t('nav.faq')}</a>
         <a href="/#contact" className="btn btn-primary" onClick={closeMenu}>
           <span>{t('cta.book')}</span> →

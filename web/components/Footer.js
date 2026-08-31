@@ -62,7 +62,6 @@ export default function Footer() {
           </div>
           <div className="ftr-col">
             <h5>{t('footer.company')}</h5>
-            <a href="/#about">{t('footer.c1')}</a>
             <a href="/#process">{t('footer.c2')}</a>
             <a href="/#faq">{t('footer.c3')}</a>
             <a href="/#contact">{t('footer.c4')}</a>
