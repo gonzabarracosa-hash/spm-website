@@ -21,3 +21,7 @@ export const CONTACT_EMAIL = 'info@spmdesignsolutions.com';
 export const CONTACT_PHONE = '+32456893352';
 export const CONTACT_PHONE_DISPLAY = '+32 456 89 33 52';
 export const WHATSAPP_URL = 'https://wa.me/' + CONTACT_PHONE.replace('+', '');
+
+/* Google Calendar "Appointment schedule" booking page for info@spmdesignsolutions.com
+   (requires Google Workspace). Set once created — see app/agenda for the page that embeds it. */
+export const AGENDA_EMBED_URL = process.env.NEXT_PUBLIC_AGENDA_EMBED_URL || '';
