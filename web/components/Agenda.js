@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { AGENDA_EMBED_URL, CONTACT_EMAIL, WHATSAPP_URL } from '../lib/site';
+import { AGENDA_BOOKING_URL, CONTACT_EMAIL, WHATSAPP_URL } from '../lib/site';
 
 function useTimezone() {
   const [tz, setTz] = useState('');
@@ -27,8 +27,8 @@ export default function Agenda() {
             Schedule a discovery call
           </h1>
           <p>
-            30 minutes over Google Meet to map your workflow and see if there's a quick win. Pick whatever slot works for
-            you — times below are shown in your own timezone.
+            30 minutes over Google Meet to map your workflow and see if there's a quick win. Your Google Calendar
+            appointment page shows slots in your own timezone automatically.
           </p>
           {tz && (
             <div
@@ -55,44 +55,32 @@ export default function Agenda() {
         <div
           style={{
             marginTop: 48,
-            maxWidth: 860,
+            maxWidth: 640,
             marginLeft: 'auto',
             marginRight: 'auto',
             border: '1px solid var(--line)',
             borderRadius: 8,
-            overflow: 'hidden',
+            padding: '56px 40px',
+            textAlign: 'center',
             background: 'var(--paper)',
             boxShadow: '0 24px 60px -30px rgba(10,29,55,.28)',
           }}
         >
-          {AGENDA_EMBED_URL ? (
-            <iframe
-              src={AGENDA_EMBED_URL}
-              title="Book a call with SPM Design Solutions"
-              style={{ width: '100%', height: 720, border: 'none', display: 'block' }}
-            />
-          ) : (
-            <div style={{ padding: '64px 40px', textAlign: 'center' }}>
-              <div
-                className="mono"
-                style={{ fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--grey-2)' }}
-              >
-                Calendar sync in progress
-              </div>
-              <p style={{ marginTop: 14, color: 'var(--ink-2)', fontSize: 16, maxWidth: 440, marginLeft: 'auto', marginRight: 'auto' }}>
-                The live booking calendar isn't connected yet. In the meantime, reach out directly and we'll find a time
-                that works.
-              </p>
-              <div style={{ display: 'flex', gap: 12, justifyContent: 'center', marginTop: 24, flexWrap: 'wrap' }}>
-                <a href={'mailto:' + CONTACT_EMAIL} className="btn btn-primary">
-                  <span>Email us</span> <span className="arw">→</span>
-                </a>
-                <a href={WHATSAPP_URL} target="_blank" rel="noopener" className="btn btn-ghost">
-                  WhatsApp us
-                </a>
-              </div>
-            </div>
-          )}
+          <div className="mono" style={{ fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--orange)' }}>
+            Live availability
+          </div>
+          <p style={{ marginTop: 14, color: 'var(--ink-2)', fontSize: 16, maxWidth: 440, marginLeft: 'auto', marginRight: 'auto' }}>
+            Opens your real-time calendar in a new tab — pick any open slot and you'll get a Google Meet link instantly.
+          </p>
+          <a
+            href={AGENDA_BOOKING_URL}
+            target="_blank"
+            rel="noopener"
+            className="btn btn-primary"
+            style={{ marginTop: 24, justifyContent: 'center' }}
+          >
+            <span>Open booking calendar</span> <span className="arw">→</span>
+          </a>
         </div>
 
         <p className="mono" style={{ textAlign: 'center', marginTop: 24, fontSize: 12, color: 'var(--grey-2)' }}>
