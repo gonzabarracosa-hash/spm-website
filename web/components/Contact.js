@@ -176,6 +176,10 @@ export default function Contact() {
                   <input id="company" name="company" type="text" placeholder={t('form.company_ph')} disabled={disabled} />
                 </div>
               </div>
+              <div className="field">
+                <label htmlFor="website">{t('form.website')}</label>
+                <input id="website" name="website" type="url" placeholder={t('form.website_ph')} disabled={disabled} />
+              </div>
               <div className={'field' + (errors.email ? ' err' : '')}>
                 <label htmlFor="email">{t('form.email')}</label>
                 <input
@@ -201,6 +205,27 @@ export default function Contact() {
               <div className="field">
                 <label htmlFor="msg">{t('form.msg')}</label>
                 <textarea id="msg" name="msg" placeholder={t('form.msg_ph')} disabled={disabled}></textarea>
+              </div>
+              <div className="field">
+                <label htmlFor="goal">{t('form.goal')}</label>
+                <textarea id="goal" name="goal" placeholder={t('form.goal_ph')} disabled={disabled}></textarea>
+              </div>
+              <div className="field">
+                <label htmlFor="attendees">{t('form.attendees')}</label>
+                <input id="attendees" name="attendees" type="text" placeholder={t('form.attendees_ph')} disabled={disabled} />
+              </div>
+              <div className="field">
+                <label htmlFor="resources">{t('form.resources')}</label>
+                <select id="resources" name="resources" disabled={disabled}>
+                  <option>{t('form.resources1')}</option>
+                  <option>{t('form.resources2')}</option>
+                  <option>{t('form.resources3')}</option>
+                  <option>{t('form.resources4')}</option>
+                </select>
+              </div>
+              <div className="field">
+                <label htmlFor="implementer">{t('form.implementer')}</label>
+                <input id="implementer" name="implementer" type="text" placeholder={t('form.implementer_ph')} disabled={disabled} />
               </div>
               <button type="submit" className="btn btn-primary" style={{ justifyContent: 'center' }} disabled={disabled}>
                 <span>{t('form.submit')}</span> <span className="arw">→</span>
