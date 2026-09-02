@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AGENDA_BOOKING_URL, CONTACT_EMAIL, WHATSAPP_URL } from '../lib/site';
+import { useI18n } from './LanguageProvider';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
 
@@ -50,6 +51,7 @@ function useMouseTilt(ref, maxTilt = 7) {
 }
 
 export default function Agenda() {
+  const { t } = useI18n();
   const tz = useTimezone();
   const cardRef = useRef(null);
   const formRef = useRef(null);
@@ -99,7 +101,7 @@ export default function Agenda() {
     <section className="section" style={{ paddingTop: 72 }}>
       <div className="wrap">
         <div className="sec-head" style={{ margin: '0 auto', textAlign: 'center', maxWidth: 640 }}>
-          <span className="eyebrow">Book a call</span>
+          <span className="eyebrow">{t('cta.book')}</span>
           <h1
             style={{
               fontFamily: "'Montserrat',sans-serif",
@@ -110,12 +112,9 @@ export default function Agenda() {
               letterSpacing: '-0.02em',
             }}
           >
-            Schedule a discovery call
+            {t('agenda.h1')}
           </h1>
-          <p>
-            A few quick questions first, then you'll get the link to a real-time calendar for a 30-minute Google Meet —
-            shown in your own timezone automatically.
-          </p>
+          <p>{t('agenda.sub')}</p>
           {tz && (
             <div
               className="mono"
@@ -133,7 +132,7 @@ export default function Agenda() {
               }}
             >
               <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--green)', display: 'inline-block' }} />
-              Detected timezone: {tz}
+              {t('agenda.tz')} {tz}
             </div>
           )}
         </div>
@@ -162,13 +161,13 @@ export default function Agenda() {
                   <path d="M7 12.5l3 3 7-7" />
                 </svg>
                 <div className="mono" style={{ fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--orange)', marginTop: 16 }}>
-                  Thanks
+                  {t('agenda.thanks')}
                 </div>
                 <p style={{ marginTop: 10, color: 'var(--ink-2)', fontSize: 16, maxWidth: 420, marginLeft: 'auto', marginRight: 'auto' }}>
-                  Here's your booking calendar — pick any open slot and you'll get a Google Meet link instantly.
+                  {t('agenda.thanks_p')}
                 </p>
                 <a href={AGENDA_BOOKING_URL} target="_blank" rel="noopener" className="btn btn-primary" style={{ marginTop: 24, justifyContent: 'center' }}>
-                  <span>Open booking calendar</span> <span className="arw">→</span>
+                  <span>{t('agenda.open_cal')}</span> <span className="arw">→</span>
                 </a>
               </div>
             ) : (
@@ -176,51 +175,51 @@ export default function Agenda() {
                 <input type="hidden" name="source" value="agenda page" />
                 <div className="field row2">
                   <div className={'field' + (errors.name ? ' err' : '')} style={{ gap: 7 }}>
-                    <label htmlFor="a-name">Name</label>
-                    <input id="a-name" name="name" type="text" placeholder="Your name" required disabled={disabled} onInput={() => clearError('name')} />
-                    <span className="errmsg">Please enter your name.</span>
+                    <label htmlFor="a-name">{t('form.name')}</label>
+                    <input id="a-name" name="name" type="text" placeholder={t('form.name_ph')} required disabled={disabled} onInput={() => clearError('name')} />
+                    <span className="errmsg">{t('form.name_err')}</span>
                   </div>
                   <div className="field" style={{ gap: 7 }}>
-                    <label htmlFor="a-company">Company</label>
-                    <input id="a-company" name="company" type="text" placeholder="Company" disabled={disabled} />
+                    <label htmlFor="a-company">{t('form.company')}</label>
+                    <input id="a-company" name="company" type="text" placeholder={t('form.company_ph')} disabled={disabled} />
                   </div>
                 </div>
                 <div className="field">
-                  <label htmlFor="a-website">Company website</label>
-                  <input id="a-website" name="website" type="url" placeholder="https://yourcompany.com" disabled={disabled} />
+                  <label htmlFor="a-website">{t('form.website')}</label>
+                  <input id="a-website" name="website" type="url" placeholder={t('form.website_ph')} disabled={disabled} />
                 </div>
                 <div className={'field' + (errors.email ? ' err' : '')}>
-                  <label htmlFor="a-email">Work email</label>
+                  <label htmlFor="a-email">{t('form.email')}</label>
                   <input id="a-email" name="email" type="email" placeholder="you@company.com" required disabled={disabled} onInput={() => clearError('email')} />
-                  <span className="errmsg">Enter a valid email address.</span>
+                  <span className="errmsg">{t('form.email_err')}</span>
                 </div>
                 <div className="field">
-                  <label htmlFor="a-goal">What do you want to achieve with our software?</label>
-                  <textarea id="a-goal" name="goal" placeholder="e.g. one central place to track every drawing revision" disabled={disabled}></textarea>
+                  <label htmlFor="a-goal">{t('form.goal')}</label>
+                  <textarea id="a-goal" name="goal" placeholder={t('form.goal_ph')} disabled={disabled}></textarea>
                 </div>
                 <div className="field">
-                  <label htmlFor="a-attendees">Who will join the call?</label>
-                  <input id="a-attendees" name="attendees" type="text" placeholder="Names & roles, e.g. Jane Doe, Engineering Manager" disabled={disabled} />
+                  <label htmlFor="a-attendees">{t('form.attendees')}</label>
+                  <input id="a-attendees" name="attendees" type="text" placeholder={t('form.attendees_ph')} disabled={disabled} />
                 </div>
                 <div className="field">
-                  <label htmlFor="a-resources">Resources for implementation & training</label>
+                  <label htmlFor="a-resources">{t('form.resources')}</label>
                   <select id="a-resources" name="resources" disabled={disabled}>
-                    <option>Dedicated in-house engineer / IT</option>
-                    <option>Shared or part-time resource</option>
-                    <option>None yet — we'd need full support</option>
-                    <option>Not sure yet</option>
+                    <option>{t('form.resources1')}</option>
+                    <option>{t('form.resources2')}</option>
+                    <option>{t('form.resources3')}</option>
+                    <option>{t('form.resources4')}</option>
                   </select>
                 </div>
                 <div className="field">
-                  <label htmlFor="a-implementer">Who will implement & maintain it internally?</label>
-                  <input id="a-implementer" name="implementer" type="text" placeholder="e.g. our lead design engineer" disabled={disabled} />
+                  <label htmlFor="a-implementer">{t('form.implementer')}</label>
+                  <input id="a-implementer" name="implementer" type="text" placeholder={t('form.implementer_ph')} disabled={disabled} />
                 </div>
                 <button type="submit" className="btn btn-primary" style={{ justifyContent: 'center' }} disabled={disabled}>
-                  <span>Continue to booking</span> <span className="arw">→</span>
+                  <span>{t('agenda.continue')}</span> <span className="arw">→</span>
                 </button>
                 {status === 'error' && (
                   <div className="form-ok show" style={{ color: '#e0443e' }}>
-                    Something went wrong. Please try again or email us directly.
+                    {t('agenda.err')}
                   </div>
                 )}
               </form>
@@ -229,7 +228,7 @@ export default function Agenda() {
         </div>
 
         <p className="mono" style={{ textAlign: 'center', marginTop: 24, fontSize: 12, color: 'var(--grey-2)' }}>
-          Prefer email or WhatsApp?{' '}
+          {t('agenda.prefer')}{' '}
           <a href={'mailto:' + CONTACT_EMAIL} style={{ color: 'var(--navy)' }}>
             {CONTACT_EMAIL}
           </a>{' '}
