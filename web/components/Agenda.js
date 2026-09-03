@@ -110,7 +110,9 @@ export default function Agenda() {
   const validateStep = () => {
     if (!current.required) return true;
     const v = values[current.key].trim();
-    if (current.type === 'email') return EMAIL_RE.test(v);
+    if (current.type === 'email') {
+      return EMAIL_RE.test(v) || v.toLowerCase() === t('form.no_email').toLowerCase();
+    }
     return v.length > 0;
   };
 
@@ -311,6 +313,11 @@ export default function Agenda() {
                         />
                       )}
                       {error && <span className="errmsg" style={{ display: 'block' }}>{t(current.errKey || 'form.name_err')}</span>}
+                      {current.key === 'email' && !error && (
+                        <span className="mono" style={{ fontSize: 12, color: 'var(--grey)' }}>
+                          {t('form.no_email_hint')}
+                        </span>
+                      )}
                     </div>
                   </div>
 
