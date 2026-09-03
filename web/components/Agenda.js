@@ -126,6 +126,13 @@ export default function Agenda() {
     setStep((s) => Math.min(s + 1, TOTAL - 1));
   };
 
+  const skipEmail = () => {
+    setValues((vals) => ({ ...vals, email: t('form.no_email') }));
+    setError(false);
+    setDir(1);
+    setStep((s) => Math.min(s + 1, TOTAL - 1));
+  };
+
   const goBack = () => {
     setError(false);
     setDir(-1);
@@ -313,10 +320,26 @@ export default function Agenda() {
                         />
                       )}
                       {error && <span className="errmsg" style={{ display: 'block' }}>{t(current.errKey || 'form.name_err')}</span>}
-                      {current.key === 'email' && !error && (
-                        <span className="mono" style={{ fontSize: 12, color: 'var(--grey)' }}>
-                          {t('form.no_email_hint')}
-                        </span>
+                      {current.key === 'email' && (
+                        <button
+                          type="button"
+                          onClick={skipEmail}
+                          disabled={disabled}
+                          className="mono"
+                          style={{
+                            alignSelf: 'flex-start',
+                            background: 'none',
+                            border: 'none',
+                            padding: 0,
+                            marginTop: 2,
+                            fontSize: 12,
+                            color: 'var(--grey)',
+                            textDecoration: 'underline',
+                            cursor: 'pointer',
+                          }}
+                        >
+                          {t('form.no_email_cta')}
+                        </button>
                       )}
                     </div>
                   </div>
