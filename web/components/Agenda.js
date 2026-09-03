@@ -10,6 +10,32 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
    set — a hidden "source" field on the form tells them apart in your inbox. */
 const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_AGENDA_ENDPOINT || 'https://formspree.io/f/xgaeonel';
 
+const STEPS = [
+  { key: 'name', type: 'text', required: true, labelKey: 'form.name', phKey: 'form.name_ph', errKey: 'form.name_err' },
+  { key: 'company', type: 'text', required: false, labelKey: 'form.company', phKey: 'form.company_ph' },
+  { key: 'website', type: 'url', required: false, labelKey: 'form.website', phKey: 'form.website_ph' },
+  { key: 'companySize', type: 'select', required: false, labelKey: 'form.company_size', optionKeys: ['form.company_size1', 'form.company_size2', 'form.company_size3', 'form.company_size4'] },
+  { key: 'email', type: 'email', required: true, labelKey: 'form.email', phKey: null, errKey: 'form.email_err' },
+  { key: 'goal', type: 'textarea', required: false, labelKey: 'form.goal', phKey: 'form.goal_ph' },
+  { key: 'attendees', type: 'text', required: false, labelKey: 'form.attendees', phKey: 'form.attendees_ph' },
+  { key: 'resources', type: 'select', required: false, labelKey: 'form.resources', optionKeys: ['form.resources1', 'form.resources2', 'form.resources3', 'form.resources4'] },
+  { key: 'implementer', type: 'text', required: false, labelKey: 'form.implementer', phKey: 'form.implementer_ph' },
+  { key: 'timeline', type: 'select', required: false, labelKey: 'form.timeline', optionKeys: ['form.timeline1', 'form.timeline2', 'form.timeline3', 'form.timeline4'] },
+];
+const TOTAL = STEPS.length;
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    try {
+      setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    } catch (e) {
+      setReduced(false);
+    }
+  }, []);
+  return reduced;
+}
+
 function useTimezone() {
   const [tz, setTz] = useState('');
   useEffect(() => {
@@ -27,7 +53,7 @@ function useTimezone() {
    idea is reimplemented natively: the card leans gently toward the cursor
    instead of needing a click-drag (which would fight with clicking form
    fields), and eases back flat on mouse leave. */
-function useMouseTilt(ref, maxTilt = 7) {
+function useMouseTilt(ref, maxTilt = 5) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -50,44 +76,84 @@ function useMouseTilt(ref, maxTilt = 7) {
   }, [ref, maxTilt]);
 }
 
+const emptyValues = STEPS.reduce((acc, s) => ({ ...acc, [s.key]: '' }), {});
+
 export default function Agenda() {
   const { t } = useI18n();
   const tz = useTimezone();
+  const reducedMotion = usePrefersReducedMotion();
   const cardRef = useRef(null);
-  const formRef = useRef(null);
+  const inputRef = useRef(null);
   useMouseTilt(cardRef);
 
-  const [errors, setErrors] = useState({ name: false, email: false });
+  const [values, setValues] = useState(emptyValues);
+  const [step, setStep] = useState(0);
+  const [dir, setDir] = useState(1);
+  const [error, setError] = useState(false);
   const [status, setStatus] = useState('idle'); // idle | sending | ok | error
   const [disabled, setDisabled] = useState(false);
 
-  const clearError = (field) => setErrors((e) => (e[field] ? { ...e, [field]: false } : e));
+  const current = STEPS[step];
+  const isLast = step === TOTAL - 1;
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    const form = formRef.current;
-    const name = form.querySelector('#a-name');
-    const email = form.querySelector('#a-email');
-    let ok = true;
-    const next = { name: false, email: false };
-    if (!name.value.trim()) {
-      next.name = true;
-      ok = false;
-    }
-    if (!EMAIL_RE.test(email.value.trim())) {
-      next.email = true;
-      ok = false;
-    }
-    setErrors(next);
-    if (!ok) return;
+  useEffect(() => {
+    if (status !== 'idle') return;
+    const el = inputRef.current;
+    if (el) el.focus();
+  }, [step, status]);
 
+  const setValue = (key, v) => {
+    setValues((vals) => ({ ...vals, [key]: v }));
+    if (error) setError(false);
+  };
+
+  const validateStep = () => {
+    if (!current.required) return true;
+    const v = values[current.key].trim();
+    if (current.type === 'email') return EMAIL_RE.test(v);
+    return v.length > 0;
+  };
+
+  const goNext = () => {
+    if (!validateStep()) {
+      setError(true);
+      return;
+    }
+    setError(false);
+    setDir(1);
+    setStep((s) => Math.min(s + 1, TOTAL - 1));
+  };
+
+  const goBack = () => {
+    setError(false);
+    setDir(-1);
+    setStep((s) => Math.max(s - 1, 0));
+  };
+
+  const onKeyDown = (e) => {
+    if (e.key === 'Enter' && current.type !== 'textarea') {
+      e.preventDefault();
+      if (isLast) submit();
+      else goNext();
+    }
+  };
+
+  const submit = async () => {
+    if (!validateStep()) {
+      setError(true);
+      return;
+    }
     setDisabled(true);
     setStatus('sending');
     try {
+      const fd = new FormData();
+      STEPS.forEach((s) => fd.append(s.key, values[s.key]));
+      fd.append('source', 'agenda page');
+      fd.append('timezone', tz);
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { Accept: 'application/json' },
-        body: new FormData(form),
+        body: fd,
       });
       if (!res.ok) throw new Error('submit failed');
       setStatus('ok');
@@ -95,6 +161,12 @@ export default function Agenda() {
       setStatus('error');
       setDisabled(false);
     }
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (isLast) submit();
+    else goNext();
   };
 
   return (
@@ -147,6 +219,7 @@ export default function Agenda() {
               boxShadow: '0 24px 60px -30px rgba(10,29,55,.28)',
               transition: 'transform .15s ease',
               transformStyle: 'preserve-3d',
+              overflow: 'hidden',
             }}
           >
             {status === 'ok' ? (
@@ -171,58 +244,103 @@ export default function Agenda() {
                 </a>
               </div>
             ) : (
-              <form className="contact" id="agendaForm" noValidate ref={formRef} onSubmit={onSubmit}>
-                <input type="hidden" name="source" value="agenda page" />
-                <div className="field row2">
-                  <div className={'field' + (errors.name ? ' err' : '')} style={{ gap: 7 }}>
-                    <label htmlFor="a-name">{t('form.name')}</label>
-                    <input id="a-name" name="name" type="text" placeholder={t('form.name_ph')} required disabled={disabled} onInput={() => clearError('name')} />
-                    <span className="errmsg">{t('form.name_err')}</span>
+              <>
+                <div style={{ height: 3, background: 'var(--line)' }}>
+                  <div
+                    style={{
+                      height: '100%',
+                      width: ((step + 1) / TOTAL) * 100 + '%',
+                      background: 'var(--orange)',
+                      transition: 'width .35s ease',
+                    }}
+                  />
+                </div>
+                <form className="contact" onSubmit={onSubmit} noValidate style={{ padding: '40px 40px 32px' }}>
+                  <div
+                    className="mono"
+                    style={{ fontSize: 11, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--grey)', marginBottom: 18 }}
+                  >
+                    {t('agenda.progress').replace('{n}', step + 1).replace('{total}', TOTAL)}
                   </div>
-                  <div className="field" style={{ gap: 7 }}>
-                    <label htmlFor="a-company">{t('form.company')}</label>
-                    <input id="a-company" name="company" type="text" placeholder={t('form.company_ph')} disabled={disabled} />
+                  <div
+                    key={step}
+                    style={
+                      reducedMotion
+                        ? undefined
+                        : { animation: (dir > 0 ? 'agendaSlideInRight' : 'agendaSlideInLeft') + ' .32s ease' }
+                    }
+                  >
+                    <div className={'field' + (error ? ' err' : '')} style={{ gap: 7 }}>
+                      <label htmlFor="agenda-field">{t(current.labelKey)}</label>
+                      {current.type === 'textarea' ? (
+                        <textarea
+                          id="agenda-field"
+                          ref={inputRef}
+                          value={values[current.key]}
+                          onChange={(e) => setValue(current.key, e.target.value)}
+                          placeholder={current.phKey ? t(current.phKey) : ''}
+                          disabled={disabled}
+                        />
+                      ) : current.type === 'select' ? (
+                        <select
+                          id="agenda-field"
+                          ref={inputRef}
+                          value={values[current.key]}
+                          onChange={(e) => setValue(current.key, e.target.value)}
+                          disabled={disabled}
+                        >
+                          <option value="" disabled>
+                            {t('form.select')}
+                          </option>
+                          {current.optionKeys.map((k) => (
+                            <option key={k} value={t(k)}>
+                              {t(k)}
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        <input
+                          id="agenda-field"
+                          ref={inputRef}
+                          type={current.type}
+                          value={values[current.key]}
+                          onChange={(e) => setValue(current.key, e.target.value)}
+                          placeholder={current.phKey ? t(current.phKey) : 'you@company.com'}
+                          onKeyDown={onKeyDown}
+                          disabled={disabled}
+                        />
+                      )}
+                      {error && <span className="errmsg" style={{ display: 'block' }}>{t(current.errKey || 'form.name_err')}</span>}
+                    </div>
                   </div>
-                </div>
-                <div className="field">
-                  <label htmlFor="a-website">{t('form.website')}</label>
-                  <input id="a-website" name="website" type="url" placeholder={t('form.website_ph')} disabled={disabled} />
-                </div>
-                <div className={'field' + (errors.email ? ' err' : '')}>
-                  <label htmlFor="a-email">{t('form.email')}</label>
-                  <input id="a-email" name="email" type="email" placeholder="you@company.com" required disabled={disabled} onInput={() => clearError('email')} />
-                  <span className="errmsg">{t('form.email_err')}</span>
-                </div>
-                <div className="field">
-                  <label htmlFor="a-goal">{t('form.goal')}</label>
-                  <textarea id="a-goal" name="goal" placeholder={t('form.goal_ph')} disabled={disabled}></textarea>
-                </div>
-                <div className="field">
-                  <label htmlFor="a-attendees">{t('form.attendees')}</label>
-                  <input id="a-attendees" name="attendees" type="text" placeholder={t('form.attendees_ph')} disabled={disabled} />
-                </div>
-                <div className="field">
-                  <label htmlFor="a-resources">{t('form.resources')}</label>
-                  <select id="a-resources" name="resources" disabled={disabled}>
-                    <option>{t('form.resources1')}</option>
-                    <option>{t('form.resources2')}</option>
-                    <option>{t('form.resources3')}</option>
-                    <option>{t('form.resources4')}</option>
-                  </select>
-                </div>
-                <div className="field">
-                  <label htmlFor="a-implementer">{t('form.implementer')}</label>
-                  <input id="a-implementer" name="implementer" type="text" placeholder={t('form.implementer_ph')} disabled={disabled} />
-                </div>
-                <button type="submit" className="btn btn-primary" style={{ justifyContent: 'center' }} disabled={disabled}>
-                  <span>{t('agenda.continue')}</span> <span className="arw">→</span>
-                </button>
-                {status === 'error' && (
-                  <div className="form-ok show" style={{ color: '#e0443e' }}>
-                    {t('agenda.err')}
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 24 }}>
+                    <button
+                      type="button"
+                      onClick={goBack}
+                      disabled={step === 0 || disabled}
+                      className="btn"
+                      style={{ visibility: step === 0 ? 'hidden' : 'visible' }}
+                    >
+                      ← {t('agenda.back')}
+                    </button>
+                    {isLast ? (
+                      <button type="submit" className="btn btn-primary" disabled={disabled}>
+                        <span>{t('agenda.continue')}</span> <span className="arw">→</span>
+                      </button>
+                    ) : (
+                      <button type="submit" className="btn btn-primary" disabled={disabled}>
+                        <span>{t('agenda.next')}</span> <span className="arw">→</span>
+                      </button>
+                    )}
                   </div>
-                )}
-              </form>
+                  {status === 'error' && (
+                    <div className="form-ok show" style={{ color: '#e0443e', marginTop: 16 }}>
+                      {t('agenda.err')}
+                    </div>
+                  )}
+                </form>
+              </>
             )}
           </div>
         </div>
