@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    :root{
+      --navy:#0A1D37; --ink-2:#3a4654; --grey:#6B6F76; --grey-2:#9aa3ad;
+      --cloud:#F5F7FA; --line:#e2e6ec; --orange:#FF6A00; --orange-d:#e85f00;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;}
+    .slide{width:1080px; height:1080px; position:relative; overflow:hidden;
+      background:var(--cloud); font-family:'Inter',sans-serif; text-align:center;}
+    .wordmark{position:absolute; top:56px; left:64px; font-family:'IBM Plex Mono',monospace;
+      font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:var(--grey-2);}
+    .sheet-tag{position:absolute; top:56px; right:64px; font-family:'IBM Plex Mono',monospace;
+      font-size:15px; letter-spacing:.08em; color:var(--grey-2);}
+    .eyebrow{position:absolute; left:64px; right:64px; top:230px; font-family:'IBM Plex Mono',monospace;
+      font-size:20px; letter-spacing:.18em; text-transform:uppercase; color:var(--orange);}
+    h2{position:absolute; left:100px; right:100px; top:296px; font-family:'Montserrat',sans-serif; font-weight:800;
+      font-size:58px; line-height:1.2; letter-spacing:-0.02em; color:var(--navy); margin:0; text-wrap:balance;}
+    .btn{position:absolute; left:50%; top:600px; transform:translateX(-50%); display:inline-flex; align-items:center;
+      gap:12px; background:var(--orange); color:#fff; font-family:'Montserrat',sans-serif; font-weight:700;
+      font-size:28px; padding:26px 46px; border-radius:8px; white-space:nowrap;}
+    .footer{position:absolute; left:64px; right:64px; bottom:90px; font-family:'IBM Plex Mono',monospace;
+      font-size:19px; letter-spacing:.06em; color:var(--grey); line-height:1.8;}
+    .footer b{color:var(--navy);}
+  </style>
+</helmet>
+<div class="slide">
+  <div class="wordmark">SPM Design Solutions</div>
+  <div class="sheet-tag">08 / 08</div>
+  <div class="eyebrow">The moment is now</div>
+  <h2>Every week without automating is time — and money — you don't get back.</h2>
+  <div class="btn">Book your call →</div>
+  <div class="footer"><b>spmdesignsolutions.com/agenda</b><br>@spmdesignsolutions</div>
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    :root{
+      --navy:#0A1D37; --ink-2:#3a4654; --grey-2:#9aa3ad; --paper:#ffffff;
+      --line:#e2e6ec; --line-2:#eef1f5; --orange:#FF6A00;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;}
+    .slide{width:1080px; height:1080px; position:relative; overflow:hidden;
+      background:var(--paper); font-family:'Inter',sans-serif;}
+    .wordmark{position:absolute; top:56px; left:64px; font-family:'IBM Plex Mono',monospace;
+      font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:var(--grey-2);}
+    .sheet-tag{position:absolute; top:56px; right:64px; font-family:'IBM Plex Mono',monospace;
+      font-size:15px; letter-spacing:.08em; color:var(--grey-2);}
+    .content{position:absolute; left:64px; right:64px; top:172px;}
+    .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:20px; letter-spacing:.18em;
+      text-transform:uppercase; color:var(--orange); display:block; margin-bottom:24px;}
+    h2{font-family:'Montserrat',sans-serif; font-weight:800; font-size:56px; line-height:1.15;
+      letter-spacing:-0.02em; color:var(--navy); margin:0; text-wrap:balance; max-width:900px;}
+    .list{position:absolute; left:64px; right:64px; bottom:110px;}
+    .item{display:flex; align-items:center; gap:20px; padding:26px 0; border-top:1px solid var(--line-2);
+      font-family:'IBM Plex Mono',monospace; font-size:26px; color:var(--ink-2);}
+    .item:first-child{border-top:1px solid var(--line);}
+    .plus{color:var(--orange); font-weight:600; font-size:30px; flex:0 0 auto; width:24px;}
+  </style>
+</helmet>
+<div class="slide">
+  <div class="wordmark">SPM Design Solutions</div>
+  <div class="sheet-tag">06 / 08</div>
+  <div class="content">
+    <span class="eyebrow">SPM Design Solutions</span>
+    <h2>We automate the repetitive parts of your engineering.</h2>
+  </div>
+  <div class="list">
+    <div class="item"><span class="plus">+</span>CAD & iLogic automation</div>
+    <div class="item"><span class="plus">+</span>Document management & revision control</div>
+    <div class="item"><span class="plus">+</span>Custom AI workflows</div>
+    <div class="item"><span class="plus">+</span>Gantt planning</div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

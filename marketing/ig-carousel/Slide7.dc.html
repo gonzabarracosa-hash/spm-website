@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    :root{ --navy:#0A1D37; --orange:#FF6A00; }
+    *{box-sizing:border-box;}
+    body{margin:0;}
+    .slide{width:1080px; height:1080px; position:relative; overflow:hidden;
+      background:var(--navy); font-family:'Inter',sans-serif; text-align:center;}
+    .wordmark{position:absolute; top:56px; left:64px; font-family:'IBM Plex Mono',monospace;
+      font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.5);}
+    .sheet-tag{position:absolute; top:56px; right:64px; font-family:'IBM Plex Mono',monospace;
+      font-size:15px; letter-spacing:.08em; color:rgba(255,255,255,.4);}
+    .eyebrow{position:absolute; left:64px; right:64px; top:200px; font-family:'IBM Plex Mono',monospace;
+      font-size:20px; letter-spacing:.18em; text-transform:uppercase; color:var(--orange);}
+    .num{position:absolute; left:0; right:0; top:300px; font-family:'Montserrat',sans-serif; font-weight:800;
+      font-size:260px; line-height:1; color:var(--orange); letter-spacing:-0.02em;}
+    .label{position:absolute; left:0; right:0; top:600px; font-family:'Inter',sans-serif; font-weight:600;
+      letter-spacing:.16em; text-transform:uppercase; font-size:26px; color:#fff;}
+    .sub{position:absolute; left:64px; right:64px; top:680px; font-size:24px; line-height:1.6; color:#cdd8e6;}
+  </style>
+</helmet>
+<div class="slide">
+  <div class="wordmark">SPM Design Solutions</div>
+  <div class="sheet-tag">07 / 08</div>
+  <div class="eyebrow">Speed matters</div>
+  <div class="num">1</div>
+  <div class="label">Working session</div>
+  <div class="sub">From idea to running system. No backlog. No slide decks in between.</div>
+</div>
+</x-dc>
+</body>
+</html>

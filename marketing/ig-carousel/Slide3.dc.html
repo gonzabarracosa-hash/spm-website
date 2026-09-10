@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    :root{
+      --navy:#0A1D37; --orange:#FF6A00;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;}
+    .slide{width:1080px; height:1080px; position:relative; overflow:hidden;
+      background:var(--navy); font-family:'Inter',sans-serif;}
+    .wordmark{position:absolute; top:56px; left:64px; font-family:'IBM Plex Mono',monospace;
+      font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.5);}
+    .sheet-tag{position:absolute; top:56px; right:64px; font-family:'IBM Plex Mono',monospace;
+      font-size:15px; letter-spacing:.08em; color:rgba(255,255,255,.4);}
+    .eyebrow{position:absolute; top:170px; left:64px; font-family:'IBM Plex Mono',monospace; font-size:20px;
+      letter-spacing:.18em; text-transform:uppercase; color:var(--orange);}
+    .contrast{position:absolute; left:0; right:0; top:340px; display:flex; flex-direction:column;
+      align-items:center; gap:18px;}
+    .old-time{font-family:'IBM Plex Mono',monospace; font-size:44px; color:rgba(255,255,255,.4);
+      position:relative;}
+    .old-time::after{content:''; position:absolute; left:-8px; right:-8px; top:50%; height:3px;
+      background:rgba(255,255,255,.35); transform:translateY(-50%);}
+    .arrow-down{width:34px; height:34px; stroke:rgba(255,255,255,.5);}
+    .new-time{font-family:'Montserrat',sans-serif; font-weight:800; font-size:220px; line-height:1;
+      color:var(--orange); letter-spacing:-0.02em;}
+    .caption{position:absolute; left:64px; right:64px; bottom:96px; text-align:center;
+      font-family:'IBM Plex Mono',monospace; font-size:19px; letter-spacing:.06em; text-transform:uppercase;
+      color:rgba(255,255,255,.55); line-height:1.6;}
+  </style>
+</helmet>
+<div class="slide">
+  <div class="wordmark">SPM Design Solutions</div>
+  <div class="sheet-tag">03 / 08</div>
+  <div class="eyebrow">The real cost</div>
+  <div class="contrast">
+    <div class="old-time">6h 20m</div>
+    <svg class="arrow-down" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    <div class="new-time">38s</div>
+  </div>
+  <div class="caption">To duplicate and renumber 142 assembly parts —<br>manual vs. automated</div>
+</div>
+</x-dc>
+</body>
+</html>

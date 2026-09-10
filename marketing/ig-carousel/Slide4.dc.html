@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    :root{
+      --navy:#0A1D37; --ink-2:#3a4654; --grey:#6B6F76; --grey-2:#9aa3ad;
+      --paper:#ffffff; --line:#e2e6ec; --orange:#FF6A00;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;}
+    .slide{width:1080px; height:1080px; position:relative; overflow:hidden;
+      background:var(--paper); font-family:'Inter',sans-serif;}
+    .wordmark{position:absolute; top:56px; left:64px; font-family:'IBM Plex Mono',monospace;
+      font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:var(--grey-2);}
+    .sheet-tag{position:absolute; top:56px; right:64px; font-family:'IBM Plex Mono',monospace;
+      font-size:15px; letter-spacing:.08em; color:var(--grey-2);}
+    .eyebrow{position:absolute; top:170px; left:0; right:0; text-align:center; font-family:'IBM Plex Mono',monospace;
+      font-size:20px; letter-spacing:.18em; text-transform:uppercase; color:var(--orange);}
+    .stat{position:absolute; left:0; right:0; top:330px; text-align:center; font-family:'Montserrat',sans-serif;
+      font-weight:800; font-size:230px; line-height:1; color:var(--navy); letter-spacing:-0.02em;}
+    .rule{position:absolute; left:50%; top:660px; transform:translateX(-50%); width:120px; height:3px; background:var(--orange);}
+    .label{position:absolute; left:64px; right:64px; top:710px; text-align:center; font-family:'IBM Plex Mono',monospace;
+      font-size:20px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2); line-height:1.7;}
+  </style>
+</helmet>
+<div class="slide">
+  <div class="wordmark">SPM Design Solutions</div>
+  <div class="sheet-tag">04 / 08</div>
+  <div class="eyebrow">The impact</div>
+  <div class="stat">40–70%</div>
+  <div class="rule"></div>
+  <div class="label">Fewer hours on repetitive design tasks, per project</div>
+</div>
+</x-dc>
+</body>
+</html>
