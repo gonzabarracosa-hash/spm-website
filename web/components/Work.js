@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useI18n } from './LanguageProvider';
 import { useReveal } from '../lib/useReveal';
 
@@ -11,7 +13,87 @@ const DEMOS = [
   { src: '/explainer/Video%20Explicativo%20Revision%20de%20Planos.dc.html', title: 'SPM drawing review explainer' },
 ];
 
+function DemoLightbox({ item, onClose }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  if (!mounted || !item) return null;
+
+  return createPortal(
+    <div
+      onClick={onClose}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 200,
+        background: 'rgba(10,29,55,.78)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 24,
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          position: 'relative',
+          width: '100%',
+          maxWidth: item.type === 'video' ? 560 : 880,
+          aspectRatio: item.type === 'video' ? '1/1' : '16/9',
+          background: '#000',
+          borderRadius: 8,
+          overflow: 'hidden',
+          boxShadow: '0 40px 90px -20px rgba(0,0,0,.6)',
+        }}
+      >
+        {item.type === 'video' ? (
+          <video
+            src={item.src}
+            controls
+            autoPlay
+            playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+          />
+        ) : (
+          <iframe src={item.src} title={item.title} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }} />
+        )}
+      </div>
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close"
+        style={{
+          position: 'absolute',
+          top: 28,
+          right: 28,
+          width: 42,
+          height: 42,
+          borderRadius: '50%',
+          border: '1px solid rgba(255,255,255,.3)',
+          background: 'rgba(255,255,255,.08)',
+          color: '#fff',
+          fontSize: 20,
+          lineHeight: 1,
+          cursor: 'pointer',
+        }}
+      >
+        ×
+      </button>
+    </div>,
+    document.body
+  );
+}
+
 export default function Work() {
+  const [lightbox, setLightbox] = useState(null);
   const { t } = useI18n();
   const head = useReveal(0);
   const d1 = useReveal(1);
@@ -38,6 +120,26 @@ export default function Work() {
           {DEMOS.map((d, idx) => (
             <div className={'demo ' + demoReveals[idx].className} ref={demoReveals[idx].ref} key={d.src}>
               <iframe src={d.src} title={d.title} loading="lazy"></iframe>
+              <button
+                type="button"
+                onClick={() => setLightbox({ type: 'iframe', src: d.src, title: d.title })}
+                aria-label={'Expand: ' + d.title}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  border: 'none',
+                  background: 'transparent',
+                  cursor: 'pointer',
+                  padding: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <span className="play" />
+              </button>
             </div>
           ))}
         </div>
@@ -70,11 +172,33 @@ export default function Work() {
           <div className={'demo ' + caseVideo.className} ref={caseVideo.ref}>
             <video
               src="/assets/SPM_DocVault_1x1.mp4"
-              controls
+              muted
+              autoPlay
+              loop
               playsInline
               preload="metadata"
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: 'inherit' }}
             ></video>
+            <button
+              type="button"
+              onClick={() => setLightbox({ type: 'video', src: '/assets/SPM_DocVault_1x1.mp4', title: 'SPM DocVault demo' })}
+              aria-label="Expand: SPM DocVault demo"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                border: 'none',
+                background: 'transparent',
+                cursor: 'pointer',
+                padding: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <span className="play" />
+            </button>
           </div>
           <div className={'proof-list ' + caseProof.className} ref={caseProof.ref}>
             <div className="proof-item">
@@ -97,6 +221,7 @@ export default function Work() {
           </a>
         </div>
       </div>
+      <DemoLightbox item={lightbox} onClose={() => setLightbox(null)} />
     </section>
   );
 }
